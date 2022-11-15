@@ -1,0 +1,7 @@
+Conhecimentos de POO a serem desenvolvidos
+
+- Aprender a gerar e utilizar arquivos .jar
+- Conhecer o formato de arquivo .json, bem como manipular os mesmos
+- Expandir os conhecimentos relacionados a JPA - Java Persistence API
+- Utilização de obejtos do tipo Image
+- Expandir os conhecimentos relacionados a utilização de Interfaces
