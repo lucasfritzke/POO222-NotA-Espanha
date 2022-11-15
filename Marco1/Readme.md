@@ -10,7 +10,7 @@
 | 01 | Roberto Sanchez | Sanchez   | 1.98   | 88.00    | 1997-11-18   | Goalkeeper   |  Brighton & Hove Albion | 
 | 02 | César Azpilicuet| César     | 1.78   | 77.00    | 1989-08-28   | Right-back   |  Chelsea Football Club  | 
 | 03 | Eric García     | García    | 1.83   | 76.00    | 2001-02-09   | Centre-back  |  Futbol Club Barcelona  | 
-| 04 | Jorge Merodio   | Koke      | 1.76   | 78.00    | 1992-01-08   | Right-back   |  Club Atlético de Madrid| 
+| 04 | Jorge Merodio   | Koke      | 1.76   | 78.00    | 1992-01-08   | Right-back   |  Atlético de Madrid     | 
 | 05 | Pau Torres      | Torres    | 1.91   | 81.00    | 1997-01-16   | Centre-back  |  Villarreal Club        | 
 | 06 | Pablo Gavira    | Gavi      | 1.82   | 76.00    | 1999-06-21   | Centre-back  |  Futbol Club Barcelona  |
 | 07 | Yeremi Pino     | Pino      | 1.78   | 75.00    | 1988-06-03   | Forward      |  Villarreal Club        |
