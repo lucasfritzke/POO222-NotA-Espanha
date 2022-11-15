@@ -10,8 +10,19 @@
 | 1  | Roberto Sanchez | Sanchez   | 1.98   | 88.00    | 1997-11-18   | Goalkeeper   |  Brighton & Hove Albion | 
 | 13 | David Raya      | Raya      | 1.83   | 80.00    | 1997-09-15   | Goalkeeper   |  Brentford              | 
 
-<br/>
-<br/>
+### Membros da comissão técnica
+| Name                  |   Nickname   |  Role     |    BirthDate | 
+|-----------------      | -----------  |  -------- |--------------|
+| Luis Enrique Martínez | Luis Enrique | Main Coach|  1970-05-08  |
+| John Avila Garcez     |  Garcez      | Assistant Coach | 1975-02-3|
+| Carlo D'Ferraz Gomez  |  D'Ferraz    | Assistant Coach | 1985-03-07 |
+
+### Membros da equipe de impressa (Dirigentes)
+| Name                  |   tel1       |  tel2     |    e-mail       | 
+|-----------------      | -----------  |  -------- |--------------   |
+| Marcos Rodriguez | +34 91 98514-7580 | +34 91 94114-7245|  marcosrodrigues@rfef.com |
+| Ruan Bueno | +34 85 93214-7541 | +34 85 345578-1487|  rbueno@rfef.com |
+
 
 ## Modelo de Classes
 
