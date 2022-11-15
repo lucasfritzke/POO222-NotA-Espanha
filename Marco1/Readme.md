@@ -5,9 +5,20 @@
 <br/>
 ## Dados dos Jogadores, Comissão técnica e dirigentes
 ### Jogadores
-| Nº | Name            |   Nickname| Height |  Weight  |    BirthDate |   Position   |   CurrentClub           | 
+| Nº | Name            |  Nickname | Height |  Weight  |    BirthDate |   Position   |   CurrentClub           | 
 |----| ----------------|  -------- |--------|--------- | ------------ |  ----------  |  -------------          |
 | 1  | Roberto Sanchez | Sanchez   | 1.98   | 88.00    | 1997-11-18   | Goalkeeper   |  Brighton & Hove Albion | 
+| 2  | César Azpilicuet| César     | 1.78   | 77.00    | 1989-08-28   | Right-back   |  Chelsea Football Club  | 
+| 3  | Eric García     | García    | 1.83   | 76.00    | 2001-02-09   | Centre-back  |  Futbol Club Barcelona  | 
+| 4  | Jorge Merodio   | Koke      | 1.76   | 78.00    | 1992-01-08   | Right-back   |  Club Atlético de Madrid| 
+| 5  | Pau Torres      | Torres    | 1.91   | 81.00    | 1997-01-16   | Centre-back  |  Villarreal Club        | 
+| 6  | Pablo Gavira    | Gavi      | 1.82   | 76.00    | 1999-06-21   | Centre-back  |  Futbol Club Barcelona  |
+| 7  | Yeremi Pino     | Pino      | 1.78   | 75.00    | 1988-06-03   | Forward      |  Villarreal Club        |
+| 8  | Sergio Busquets | Busquets  | 1.84   | 81.00    | 2002-01-17   | Defensive Mid|  Villarreal Club        |
+| 9  | Dani Olmo       | Olmo      | 1.78   | 72.00    | 1995-07-20   | Attacking Mid|  RB Leipzig             |
+| 10 | Marco Asensio   | Asensio   | 1.82   | 76.00    | 1996-04-03   | Winger       |  Real Madrid            |
+| 11 | Álvaro Morata   | Morata    | 1.90   | 84.00    | 1992-06-23   | Striker      |  Atlético Madrid        |
+| 12 | Ansu Fati       | Fati      | 1.78   | 76.00    | 2001-08-25   | Forward      |  Futbol Club Barcelona  |
 | 13 | David Raya      | Raya      | 1.83   | 80.00    | 1997-09-15   | Goalkeeper   |  Brentford              | 
 
 ### Membros da comissão técnica
