@@ -9,11 +9,11 @@ Jogadores:
 -----------------
 05 	Pau Torres/ Torres/ 1.91 /81.00/ 1997-01-16/	Centre-back/ Villarreal Club
 -----------------
-06 	Pablo Gavira/ Gavi/	1.82/ 76.00/ 1999-06-21/ Centre-back/	Futbol Club Barcelona
+06 	Pablo Gavira/ Gavi/	1.82/ 76.00/ 1999-06-21/ Centre-back/ Futbol Club Barcelona
 -----------------
 07 	Yeremi Pino/ Pino/ 1.78/ 75.00/ 1988-06-03/ Forward/ Villarreal Club
 -----------------
-08 	Sergio Busquets/ Busquets/ 1.84/ 81.00/ 2002-01-17/	Defensive Mid/ 	Villarreal Club
+08 	Sergio Busquets/ Busquets/ 1.84/ 81.00/ 2002-01-17/	Defensive Mid/ Villarreal Club
 -----------------
 09 	Dani Olmo/ Olmo/ 1.78/ 72.00/ 1995-07-20/ Attacking Mid/ RB Leipzig
 -----------------
