@@ -7,7 +7,7 @@ Jogadores:
 -----------------
 04 	Jorge Merodio/ Koke/ 1.76/ 78.00/ 1992-01-08/ Right-back/ Atlético de Madrid
 -----------------
-05 	Pau Torres/ Torres/ 1.91 /81.00/ 1997-01-16/	Centre-back/ Villarreal Club
+05 	Pau Torres/ Torres/ 1.91 /81.00/ 1997-01-16/ Centre-back/ Villarreal Club
 -----------------
 06 	Pablo Gavira/ Gavi/	1.82/ 76.00/ 1999-06-21/ Centre-back/ Futbol Club Barcelona
 -----------------
@@ -17,7 +17,7 @@ Jogadores:
 -----------------
 09 	Dani Olmo/ Olmo/ 1.78/ 72.00/ 1995-07-20/ Attacking Mid/ RB Leipzig
 -----------------
-10 	Marco Asensio/ Asensio/ 1.82/ 76.00/ 1996-04-03/	Winger/ Real Madrid
+10 	Marco Asensio/ Asensio/ 1.82/ 76.00/ 1996-04-03/ Winger/ Real Madrid
 -----------------
 11 	Álvaro Morata/ Morata/ 1.90/ 84.00/ 1992-06-23/ Striker/ Atlético Madrid
 -----------------
