@@ -9,8 +9,15 @@ class PlayerTest {
 	
 	@Test
 	void testConstructor() {
-		Player p = new Player("Lucas","10","LC",1.84, 65.2, LocalDate.of(2022, 12, 25), "Forward","Vasco");
+		Player p = new Player("Lucas","10","LC",1.84, 65.2, LocalDate.of(2000, 12, 25), "Forward","Vasco");
 		assertEquals("Forward", p.getPosition());
+		
+	}
+	
+	@Test
+	void testGetAge() {
+		Player p = new Player("Lucas","10","LC",1.84, 65.2, LocalDate.of(2000, 12, 25), "Forward","Vasco");
+		assertEquals(21, p.getAge());
 		
 	}
 

@@ -2,6 +2,7 @@ package moduleEspanha;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -36,6 +37,10 @@ public class Player extends Person implements Serializable {
 		this.setBirthDate(birthDate);
 		this.setPosition(position);
 		this.setCurrentClub(currentClub);
+	}
+	
+	public int getAge() {	
+		return Period.between(this.birthDate, LocalDate.now()).getYears();
 	}
 
 	public String getNumber() {
@@ -125,11 +130,11 @@ public class Player extends Person implements Serializable {
 
 	}
 
-	public int addHowManyQuestions() {
+	public int getHowManyQuestions() {
 		return howManyQuestions;
 	}
 
-	public void setHowManyQuestions() {
+	public void countQuestion() {
 		this.howManyQuestions++;
 	}
 
