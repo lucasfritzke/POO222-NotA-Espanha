@@ -2,6 +2,7 @@ package moduleEspanha;
 import java.awt.Image;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -128,6 +129,11 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats{
 	public String getHowManyCallsToPlayer(int number) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public ArrayList<String> getPositionsList() {
+		Player p = new Player();
+		return p.getPositionsList();
 	}
 	
 	
