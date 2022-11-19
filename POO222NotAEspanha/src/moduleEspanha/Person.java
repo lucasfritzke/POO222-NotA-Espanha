@@ -1,8 +1,14 @@
 package moduleEspanha;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable{
 	
 	private String name;
+	
+	public Person() {
+		
+	}
 
 	public Person(String name) {
 		super();
