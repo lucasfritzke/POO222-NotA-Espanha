@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import fifa.NationalTeamInfos;
 import fifa.NationalTeamStats;
 
-public class Espanha implements NationalTeamInfos{
+public class Espanha implements NationalTeamInfos, NationalTeamStats{
 
 	@Override
 	public int getHowManyMembers() {
@@ -63,6 +63,18 @@ public class Espanha implements NationalTeamInfos{
 
 	@Override
 	public NationalTeamStats getStatsResponsible() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getHowManyQuestions() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getHowManyCallsToPlayer(int number) {
 		// TODO Auto-generated method stub
 		return null;
 	}
