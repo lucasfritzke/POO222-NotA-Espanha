@@ -1,12 +1,18 @@
 package moduleTeste;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
-
 import moduleEspanha.Player;
 
 class PlayerTest {
+	
+	@Test
+	void testConstructor() {
+		Player p = new Player("Lucas","10","LC",1.84, 65.2, LocalDate.of(2022, 12, 25), "Forward","Vasco");
+		assertEquals("Forward", p.getPosition());
+		
+	}
 
 	@Test
 	void testArrayListTeste() {
