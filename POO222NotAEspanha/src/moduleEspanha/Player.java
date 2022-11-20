@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class Player extends Person implements Serializable {
 
-	// Atributos
+	//Atributos
 	private String number;
 	private String nickName;
 	private double heigth;
@@ -22,10 +22,10 @@ public class Player extends Person implements Serializable {
 	private static ArrayList<String> positionsList = new ArrayList<>(Arrays.asList("Goalkeeper", "Right-back",
 			"Centre-back", "Forward", "Defensive Mid", "Attacking Mid", "Winger", "Striker"));
 
-	// Classe utilizada para testes
+	//Classe utilizada para testes
 	public Player() {
 		super();
-		// TODO Auto-generated constructor stub
+	// TODO Auto-generated constructor stub
 	}
 
 	public Player(String name, String number, String nickName, double heigth, double weigth, LocalDate birthDate, String position,
@@ -74,7 +74,7 @@ public class Player extends Person implements Serializable {
 		if (nickName != null && !nickName.isEmpty()) {
 			this.nickName = nickName;
 		} else {
-			throw new IllegalArgumentException("nickname invalid");
+			throw new IllegalArgumentException("invalid nickname");
 		}
 
 	}
@@ -88,7 +88,7 @@ public class Player extends Person implements Serializable {
 		if (heigth >= 0) {
 			this.heigth = heigth;
 		} else {
-			throw new IllegalArgumentException("heigth invalid");
+			throw new IllegalArgumentException("invalid heigth");
 		}
 	}
 
@@ -101,7 +101,7 @@ public class Player extends Person implements Serializable {
 		if (weigth > 0) {
 			this.weigth = weigth;
 		} else {
-			throw new IllegalArgumentException("weigth invalid");
+			throw new IllegalArgumentException("invalid weigth");
 		}
 	}
 
@@ -114,7 +114,7 @@ public class Player extends Person implements Serializable {
 		if (birthDate != null) {
 			this.birthDate = birthDate;
 		} else {
-			throw new IllegalArgumentException("birthDate invalid");
+			throw new IllegalArgumentException("invalid birthDate");
 		}
 	}
 
@@ -126,7 +126,7 @@ public class Player extends Person implements Serializable {
 		if (currentClub != null && !currentClub.isBlank()) {
 			this.currentClub = currentClub;
 		} else {
-			throw new IllegalArgumentException("currentClub invalid");
+			throw new IllegalArgumentException("invalid currentClub");
 		}
 
 	}
