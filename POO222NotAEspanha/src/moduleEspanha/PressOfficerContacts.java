@@ -1,5 +1,7 @@
 package moduleEspanha;
 
-public class PressOfficerContacts {
+import java.io.Serializable;
+
+public class PressOfficerContacts extends Person implements Serializable{
 
 }

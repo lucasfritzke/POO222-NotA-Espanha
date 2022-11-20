@@ -32,6 +32,8 @@ public class Presentation {
 	private JTextField tf_player_birthdate;
 	private JTextField tf_player_currentClub;
 	private SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd");
+	private JTextField tf_player_number_remove;
+	private Espanha espanha = new Espanha();
 	/**
 	 * Launch the application.
 	 */
@@ -59,8 +61,6 @@ public class Presentation {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
-		Espanha espanha = new Espanha();
 		
 		
 		frame = new JFrame();
@@ -191,7 +191,91 @@ public class Presentation {
 		btnCadastrarPlayer.setBounds(14, 321, 96, 21);
 		panel.add(btnCadastrarPlayer);
 		
+		JLabel lblRemovePlayer = new JLabel("Remove Player");
+		lblRemovePlayer.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblRemovePlayer.setBounds(14, 352, 151, 33);
+		panel.add(lblRemovePlayer);
+		
+		JLabel lblNewLabel_1_1_1_2 = new JLabel("Number:");
+		lblNewLabel_1_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_1_1_2.setBounds(14, 379, 74, 13);
+		panel.add(lblNewLabel_1_1_1_2);
+		
+		tf_player_number_remove = new JTextField();
+		tf_player_number_remove.setColumns(10);
+		tf_player_number_remove.setBounds(98, 378, 61, 19);
+		panel.add(tf_player_number_remove);
+		
+		JButton btnNewButton = new JButton("Remove");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					espanha.removePlayer(tf_player_number_remove.getText());
+					
+				} catch ( IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+				
+			}
+		});
+		btnNewButton.setBounds(169, 377, 85, 21);
+		panel.add(btnNewButton);
+		
 		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_1, null);
+		tabbedPane.addTab("TechnicalCommitteeMember", null, panel_1, null);
+		panel_1.setLayout(null);
+		
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("PressOfficer", null, tabbedPane_1, null);
+		
+		JButton btn_Many_Members = new JButton(" Many Members");
+		btn_Many_Members.setBounds(444, 68, 154, 32);
+		frame.getContentPane().add(btn_Many_Members);
+		
+		JButton btn_Oldes_Player = new JButton("Oldest Player");
+		btn_Oldes_Player.setBounds(444, 110, 154, 32);
+		frame.getContentPane().add(btn_Oldes_Player);
+		
+		JButton btn_Youngest_Player = new JButton("Youngest Player");
+		btn_Youngest_Player.setBounds(444, 156, 154, 32);
+		frame.getContentPane().add(btn_Youngest_Player);
+		
+		JButton btn_Many_Members_1_1_1 = new JButton(" Many Members");
+		btn_Many_Members_1_1_1.setBounds(444, 200, 154, 32);
+		frame.getContentPane().add(btn_Many_Members_1_1_1);
+		
+		JButton btn_Save = new JButton("Save");
+		btn_Save.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				espanha.salvar();
+				JOptionPane.showMessageDialog(null, 
+						"successfully saved changes");
+			}
+		});
+		btn_Save.setBounds(444, 437, 154, 32);
+		frame.getContentPane().add(btn_Save);
+		
+		JButton btn_Many_Members_1_1_2 = new JButton(" Many Members");
+		btn_Many_Members_1_1_2.setBounds(444, 330, 154, 32);
+		frame.getContentPane().add(btn_Many_Members_1_1_2);
+		
+		JButton btn_Many_Members_1_2 = new JButton(" Many Members");
+		btn_Many_Members_1_2.setBounds(444, 284, 154, 32);
+		frame.getContentPane().add(btn_Many_Members_1_2);
+		
+		JButton btn_Many_Members_2 = new JButton(" Many Members");
+		btn_Many_Members_2.setBounds(444, 242, 154, 32);
+		frame.getContentPane().add(btn_Many_Members_2);
+		
+		
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		espanha.salvar();
+		JOptionPane.showMessageDialog(null, "Dados Salvos com sucesso");
+		super.finalize();
+	}
+
 }

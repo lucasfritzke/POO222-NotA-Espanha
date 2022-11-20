@@ -1,21 +1,62 @@
 package moduleEspanha;
 import java.awt.Component;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.crypto.AEADBadTagException;
 import javax.swing.JOptionPane;
 
 import fifa.NationalTeamInfos;
 import fifa.NationalTeamStats;
 
-public class Espanha implements NationalTeamInfos, NationalTeamStats{
+public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializable{
 	
 	private HashMap<String, Player> players = new HashMap<>();
+	private ArrayList<PressOfficerContacts> pressOfficerList = new ArrayList<>();
+	private ArrayList<TechnicalCommitteeMember> technicalMemberList = new ArrayList<>();
 	
 	
+	
+	public Espanha() {
+		super();
+		initizalize();
+	}
+
+	private void initizalize() {
+		
+			try(FileInputStream fis = new FileInputStream("dadosEspanha.dat");
+					ObjectInputStream ois = new ObjectInputStream(fis)) {
+				
+				players = (HashMap<String, Player>)ois.readObject();
+				pressOfficerList = (ArrayList<PressOfficerContacts>)ois.readObject();
+				technicalMemberList = (ArrayList<TechnicalCommitteeMember>)ois.readObject();
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(null,"Primeira execu��o. Arquivo ainda n�o existe.");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+	}
+
 	public void addPlayer(String name, String number, String nickName, double heigth, 
 			double weigth, LocalDate birthDate, String position,String currentClub) {
 		if(number != null && !players.containsKey(number)) {
@@ -32,6 +73,8 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats{
 			Player p =players.get(number);
 			players.remove(number);
 			JOptionPane.showMessageDialog(null, "Player "+ p.getName()+ "successfully removed");
+		} else {
+			throw new IllegalArgumentException("player does not exist");
 		}
 	}
 	
@@ -137,6 +180,22 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats{
 		return p.getPositionsList();
 	}
 	
-	
+	public void salvar() {
+		
+		try (FileOutputStream fos = new FileOutputStream("dadosEspanha.dat");
+				ObjectOutputStream oos = new ObjectOutputStream(fos)){
+			oos.writeObject(players);
+			oos.writeObject(pressOfficerList);
+			oos.writeObject(technicalMemberList);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
 
 }

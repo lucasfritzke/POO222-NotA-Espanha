@@ -1,5 +1,7 @@
 package moduleEspanha;
 
-public class TechnicalCommitteeMember {
+import java.io.Serializable;
+
+public class TechnicalCommitteeMember extends Person implements Serializable {
 
 }
