@@ -3,10 +3,16 @@ package moduleEspanha;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,13 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
-
-import javax.swing.JButton;
 
 public class Presentation {
 
@@ -272,7 +271,15 @@ public class Presentation {
 		btn_Save.setBounds(444, 437, 154, 32);
 		frame.getContentPane().add(btn_Save);
 		
-		JButton btn_Many_Members_1_1_2 = new JButton(" Many Members");
+		JButton btn_Many_Members_1_1_2 = new JButton("Flag Image");
+		btn_Many_Members_1_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Image im = espanha.getFlagImage();
+				ImageIcon ima = new ImageIcon(im);
+				JOptionPane.showMessageDialog(null, ima );
+			}
+		});
 		btn_Many_Members_1_1_2.setBounds(444, 340, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_1_1_2);
 		

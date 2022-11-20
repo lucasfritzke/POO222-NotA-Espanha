@@ -1,5 +1,7 @@
 package moduleEspanha;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,21 +9,21 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.imageio.plugins.jpeg.JPEGImageReadParam;
+import javax.imageio.stream.ImageInputStream;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonWriter;
 
 import fifa.NationalTeamInfos;
 import fifa.NationalTeamStats;
@@ -171,7 +173,19 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public Image getFlagImage() {
-		// TODO Auto-generated method stub
+		
+	File fl = new File("countryFlag.jpg");
+	BufferedImage bim = null;
+	try  {
+		bim = ImageIO.read(fl);
+		Image im = bim.getScaledInstance(450, 255, 255);
+		
+		return im;
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
 		return null;
 	}
 
