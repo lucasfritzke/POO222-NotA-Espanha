@@ -1,4 +1,5 @@
 package moduleEspanha;
+import java.awt.Component;
 import java.awt.Image;
 import java.nio.file.Path;
 import java.time.LocalDate;

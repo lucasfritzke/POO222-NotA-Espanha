@@ -1,5 +1,6 @@
 package moduleEspanha;
 
+import java.awt.Component;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;

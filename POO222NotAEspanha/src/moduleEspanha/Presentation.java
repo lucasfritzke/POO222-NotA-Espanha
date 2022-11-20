@@ -1,14 +1,25 @@
 package moduleEspanha;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+
+import javax.swing.JButton;
 
 public class Presentation {
 
@@ -20,7 +31,7 @@ public class Presentation {
 	private JTextField tf_player_weigth;
 	private JTextField tf_player_birthdate;
 	private JTextField tf_player_currentClub;
-
+	private SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd");
 	/**
 	 * Launch the application.
 	 */
@@ -48,6 +59,10 @@ public class Presentation {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		Espanha espanha = new Espanha();
+		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 653, 538);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,14 +141,10 @@ public class Presentation {
 		lblNewLabel_1_1_1_1_1_1.setBounds(20, 218, 74, 18);
 		panel.add(lblNewLabel_1_1_1_1_1_1);
 		
-		JLabel lblNewLabel_1_1_1_1_1_1_1 = new JLabel("yyyy/mm/dd");
+		JLabel lblNewLabel_1_1_1_1_1_1_1 = new JLabel("yyyy-mm-dd");
 		lblNewLabel_1_1_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel_1_1_1_1_1_1_1.setBounds(210, 216, 101, 18);
 		panel.add(lblNewLabel_1_1_1_1_1_1_1);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(104, 246, 29, 21);
-		panel.add(comboBox);
 		
 		JLabel lblNewLabel_1_1_1_1_1_1_2 = new JLabel("Position:");
 		lblNewLabel_1_1_1_1_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -149,6 +160,36 @@ public class Presentation {
 		tf_player_currentClub.setColumns(10);
 		tf_player_currentClub.setBounds(114, 285, 176, 19);
 		panel.add(tf_player_currentClub);
+		
+		JComboBox<String> cbPositions = new JComboBox<String>();
+		ArrayList<String> listaPositions = espanha.getPositionsList();
+		for (String s : listaPositions) {
+			cbPositions.addItem(s);
+		}
+		cbPositions.setBounds(90, 247, 110, 21);
+		panel.add(cbPositions);
+		
+		JButton btnCadastrarPlayer = new JButton("Register");
+		btnCadastrarPlayer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					espanha.addPlayer(
+							tf_player_name.getText(), 
+							tf_player_number.getText(),
+							tf_player_nickname.getText(),
+							Double.parseDouble(tf_player_heigth.getText()), 
+							Double.parseDouble(tf_player_weigth.getText()), 
+							LocalDate.parse(tf_player_birthdate.getText()), 
+							(String)cbPositions.getSelectedItem(), 
+							tf_player_currentClub.getText());
+					JOptionPane.showMessageDialog(null, "player added successfully");
+				} catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+			}
+		});
+		btnCadastrarPlayer.setBounds(14, 321, 96, 21);
+		panel.add(btnCadastrarPlayer);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_1, null);
