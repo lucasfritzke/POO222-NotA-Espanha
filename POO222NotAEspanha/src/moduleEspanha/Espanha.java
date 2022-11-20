@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import javax.swing.JOptionPane;
-
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-
 import fifa.NationalTeamInfos;
 import fifa.NationalTeamStats;
 
@@ -29,7 +29,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	private ArrayList<PressOfficerContacts> pressOfficerList = new ArrayList<>();
 	private ArrayList<TechnicalCommitteeMember> technicalMemberList = new ArrayList<>();
 	private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	
+	private static String countryName = "Spain";
 	
 	public Espanha() {
 		super();
@@ -134,7 +134,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	public String getPlayer(int number) {
 		
 		if(players.containsKey(Integer.toString(number))) {
-			
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			Player p = players.get(Integer.toString(number));
 			JsonObject js = new JsonObject();
 			js.addProperty("number: ", p.getNumber());
@@ -146,8 +146,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			js.addProperty("position", p.getPosition());
 			js.addProperty("number: ", p.getNumber());
 			js.addProperty("currentClub", p.getCurrentClub());
-			String json = js.toString();
-			System.out.println(json);
+			String json = gson.toJson(js).toString();
 			return json;
 			
 		} else {
@@ -165,7 +164,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	@Override
 	public String getCountryName() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.countryName;
 	}
 
 	@Override
