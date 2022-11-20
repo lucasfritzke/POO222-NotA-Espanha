@@ -129,7 +129,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
 	public String getPlayer(int number) {
 		
@@ -150,8 +150,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			return json;
 			
 		} else {
-			return null
-;
+			return null;
 		}
 	}
 
