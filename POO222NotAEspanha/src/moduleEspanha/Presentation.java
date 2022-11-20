@@ -271,11 +271,5 @@ public class Presentation {
 		
 	}
 
-	@Override
-	protected void finalize() throws Throwable {
-		espanha.salvar();
-		JOptionPane.showMessageDialog(null, "Dados Salvos com sucesso");
-		super.finalize();
-	}
 
 }
