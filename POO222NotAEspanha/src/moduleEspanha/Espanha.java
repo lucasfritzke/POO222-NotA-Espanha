@@ -1,7 +1,5 @@
 package moduleEspanha;
-import java.awt.Component;
 import java.awt.Image;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,23 +7,28 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-import javax.crypto.AEADBadTagException;
 import javax.swing.JOptionPane;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import fifa.NationalTeamInfos;
 import fifa.NationalTeamStats;
 
-public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializable{
+public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializable {
 	
 	private HashMap<String, Player> players = new HashMap<>();
 	private ArrayList<PressOfficerContacts> pressOfficerList = new ArrayList<>();
 	private ArrayList<TechnicalCommitteeMember> technicalMemberList = new ArrayList<>();
-	
+	private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	
 	public Espanha() {
@@ -129,8 +132,28 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public String getPlayer(int number) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(players.containsKey(Integer.toString(number))) {
+			
+			Player p = players.get(Integer.toString(number));
+			JsonObject js = new JsonObject();
+			js.addProperty("number: ", p.getNumber());
+			js.addProperty("name: ", p.getName());
+			js.addProperty("nickname", p.getNickName());
+			js.addProperty("height", p.getHeigth());
+			js.addProperty("weight", p.getWeigth());
+			js.addProperty("birthDate", df.format(p.getBirthDate()));
+			js.addProperty("position", p.getPosition());
+			js.addProperty("number: ", p.getNumber());
+			js.addProperty("currentClub", p.getCurrentClub());
+			String json = js.toString();
+			System.out.println(json);
+			return json;
+			
+		} else {
+			return null
+;
+		}
 	}
 
 	@Override

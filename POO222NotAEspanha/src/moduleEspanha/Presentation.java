@@ -2,6 +2,7 @@ package moduleEspanha;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class Presentation {
 	private SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd");
 	private JTextField tf_player_number_remove;
 	private Espanha espanha = new Espanha();
+	private JTextField tf_getPlayer;
 	/**
 	 * Launch the application.
 	 */
@@ -241,9 +243,23 @@ public class Presentation {
 		btn_Youngest_Player.setBounds(444, 156, 154, 32);
 		frame.getContentPane().add(btn_Youngest_Player);
 		
-		JButton btn_Many_Members_1_1_1 = new JButton(" Many Members");
-		btn_Many_Members_1_1_1.setBounds(444, 200, 154, 32);
-		frame.getContentPane().add(btn_Many_Members_1_1_1);
+		JButton btn_player_GetPlayer = new JButton("Get Player");
+		btn_player_GetPlayer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					JOptionPane.showMessageDialog(null, espanha.getPlayer(Integer.parseInt(tf_getPlayer.getText())));
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalArgumentException ex ) {
+					JOptionPane.showMessageDialog(null, "Invalid Number");
+				}
+				
+			}
+		});
+		btn_player_GetPlayer.setBounds(429, 205, 94, 26);
+		frame.getContentPane().add(btn_player_GetPlayer);
 		
 		JButton btn_Save = new JButton("Save");
 		btn_Save.addActionListener(new ActionListener() {
@@ -257,19 +273,26 @@ public class Presentation {
 		frame.getContentPane().add(btn_Save);
 		
 		JButton btn_Many_Members_1_1_2 = new JButton(" Many Members");
-		btn_Many_Members_1_1_2.setBounds(444, 330, 154, 32);
+		btn_Many_Members_1_1_2.setBounds(444, 340, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_1_1_2);
 		
 		JButton btn_Many_Members_1_2 = new JButton(" Many Members");
-		btn_Many_Members_1_2.setBounds(444, 284, 154, 32);
+		btn_Many_Members_1_2.setBounds(444, 298, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_1_2);
 		
 		JButton btn_Many_Members_2 = new JButton(" Many Members");
-		btn_Many_Members_2.setBounds(444, 242, 154, 32);
+		btn_Many_Members_2.setBounds(444, 256, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_2);
+		
+		tf_getPlayer = new JTextField();
+		tf_getPlayer.setBounds(533, 206, 55, 26);
+		frame.getContentPane().add(tf_getPlayer);
+		tf_getPlayer.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("Player Number");
+		lblNewLabel_2.setBounds(524, 233, 94, 13);
+		frame.getContentPane().add(lblNewLabel_2);
 		
 		
 	}
-
-
 }
