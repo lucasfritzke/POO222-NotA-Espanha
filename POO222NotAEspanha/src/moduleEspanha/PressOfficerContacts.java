@@ -20,9 +20,8 @@ public class PressOfficerContacts extends Person implements Serializable{
 		setTel2(tel2);
 		setEmailAccount(email);
 		setManager(isManager);
-	
 	}
-	
+
 	//Tel1
 	public String getTel1() {
 		return tel1;
@@ -55,8 +54,6 @@ public class PressOfficerContacts extends Person implements Serializable{
 	public void setManager(boolean manager) {
 		this.manager = manager;
 	}
-	
-	
 	
 }
 	

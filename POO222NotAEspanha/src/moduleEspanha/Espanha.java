@@ -64,7 +64,22 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		
 		
 	}
-
+	
+	public void addTCMember(String name, String nickname, String role, LocalDate birthDate){
+			TechnicalCommitteeMember tcm = new TechnicalCommitteeMember( name,  nickname,  role,  birthDate);
+			technicalMemberList.add(tcm);
+		}
+	public void removeTCMember(String name) {
+		int verificator = 0;
+		for(TechnicalCommitteeMember tcm : technicalMemberList) {
+			if(tcm.getName().equals(name)) {
+				verificator++;
+				technicalMemberList.remove(tcm);
+			}
+		}
+		if(verificator == 0) {throw new IllegalArgumentException("No TCMember with this name"); }
+	
+	}
 	public void addPlayer(String name, String number, String nickName, double heigth, 
 			double weigth, LocalDate birthDate, String position,String currentClub) {
 		if(number != null && !players.containsKey(number)) {

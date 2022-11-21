@@ -35,6 +35,11 @@ public class Presentation {
 	private JTextField tf_player_number_remove;
 	private Espanha espanha = new Espanha();
 	private JTextField tf_getPlayer;
+	private JTextField tf_tcm_nickname;
+	private JTextField tf_tcm_role;
+	private JTextField tf_tcm_birthdate;
+	private JTextField tf_tcm_name;
+	private JTextField tf_tcm_remove;
 	/**
 	 * Launch the application.
 	 */
@@ -226,6 +231,105 @@ public class Presentation {
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("TechnicalCommitteeMember", null, panel_1, null);
 		panel_1.setLayout(null);
+		
+		JLabel lblRegisterTechnicalComittee = new JLabel("Register Technical Comittee Member");
+		lblRegisterTechnicalComittee.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblRegisterTechnicalComittee.setBounds(10, 20, 316, 33);
+		panel_1.add(lblRegisterTechnicalComittee);
+		
+		JLabel lblNewLabel_1_1_3 = new JLabel("Nickname:");
+		lblNewLabel_1_1_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_1_3.setBounds(10, 88, 74, 13);
+		panel_1.add(lblNewLabel_1_1_3);
+		
+		tf_tcm_nickname = new JTextField();
+		tf_tcm_nickname.setColumns(10);
+		tf_tcm_nickname.setBounds(82, 86, 176, 19);
+		panel_1.add(tf_tcm_nickname);
+		
+		JLabel lblNewLabel_1_1_3_1 = new JLabel("Role:");
+		lblNewLabel_1_1_3_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_1_3_1.setBounds(10, 122, 74, 13);
+		panel_1.add(lblNewLabel_1_1_3_1);
+		
+		tf_tcm_role = new JTextField();
+		tf_tcm_role.setColumns(10);
+		tf_tcm_role.setBounds(47, 120, 176, 19);
+		panel_1.add(tf_tcm_role);
+		
+		JLabel lblNewLabel_1_1_1_1_1_1_3 = new JLabel("BirthDate:");
+		lblNewLabel_1_1_1_1_1_1_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_1_1_1_1_1_3.setBounds(10, 158, 74, 18);
+		panel_1.add(lblNewLabel_1_1_1_1_1_1_3);
+		
+		tf_tcm_birthdate = new JTextField();
+		tf_tcm_birthdate.setColumns(10);
+		tf_tcm_birthdate.setBounds(82, 159, 176, 19);
+		panel_1.add(tf_tcm_birthdate);
+		
+		JLabel lblNewLabel_1_1_1_1_1_1_1_1 = new JLabel("yyyy-mm-dd");
+		lblNewLabel_1_1_1_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_1_1_1_1_1_1_1_1.setBounds(268, 159, 101, 18);
+		panel_1.add(lblNewLabel_1_1_1_1_1_1_1_1);
+		
+		JButton btnCadastrarTCMember = new JButton("Register");
+		btnCadastrarTCMember.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					espanha.addTCMember(tf_tcm_name.getText(),
+							tf_tcm_nickname.getText(), 
+							tf_tcm_role.getText(), 
+							LocalDate.parse(tf_tcm_birthdate.getText()));
+					JOptionPane.showMessageDialog(null, " added TCMember successfully");
+				} catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+			}
+		});
+		btnCadastrarTCMember.setBounds(190, 189, 85, 21);
+		panel_1.add(btnCadastrarTCMember);
+		
+		JButton btnRemoveTCM = new JButton("Remove");
+		btnRemoveTCM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					espanha.removeTCMember(tf_tcm_remove.getText());
+					JOptionPane.showMessageDialog(null, "removed TCMember successfully");
+				} catch ( IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+				
+			}
+		});
+		btnRemoveTCM.setBounds(148, 364, 85, 21);
+		panel_1.add(btnRemoveTCM);
+		
+		JLabel lblNewLabel_1_1_3_2 = new JLabel("Name:");
+		lblNewLabel_1_1_3_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_1_3_2.setBounds(10, 64, 74, 13);
+		panel_1.add(lblNewLabel_1_1_3_2);
+		
+		tf_tcm_name = new JTextField();
+		tf_tcm_name.setColumns(10);
+		tf_tcm_name.setBounds(82, 62, 176, 19);
+		panel_1.add(tf_tcm_name);
+		
+		JLabel lblRemoveTcmember = new JLabel("Remove TCMember");
+		lblRemoveTcmember.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblRemoveTcmember.setBounds(10, 302, 248, 33);
+		panel_1.add(lblRemoveTcmember);
+		
+	
+		
+		tf_tcm_remove = new JTextField();
+		tf_tcm_remove.setColumns(10);
+		tf_tcm_remove.setBounds(57, 334, 176, 19);
+		panel_1.add(tf_tcm_remove);
+		
+		JLabel lblNewLabel_1_1_3_2_1 = new JLabel("Name:");
+		lblNewLabel_1_1_3_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1_1_3_2_1.setBounds(10, 336, 74, 13);
+		panel_1.add(lblNewLabel_1_1_3_2_1);
 		
 		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("PressOfficer", null, tabbedPane_1, null);
