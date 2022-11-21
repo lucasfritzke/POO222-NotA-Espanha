@@ -231,15 +231,33 @@ public class Presentation {
 		tabbedPane.addTab("PressOfficer", null, tabbedPane_1, null);
 		
 		JButton btn_Many_Members = new JButton(" Many Members");
-		btn_Many_Members.setBounds(444, 68, 154, 32);
+		btn_Many_Members.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, espanha.getHowManyMembers());
+			}
+		});
+		btn_Many_Members.setBounds(444, 10, 154, 32);
 		frame.getContentPane().add(btn_Many_Members);
 		
 		JButton btn_Oldes_Player = new JButton("Oldest Player");
-		btn_Oldes_Player.setBounds(444, 110, 154, 32);
+		btn_Oldes_Player.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, espanha.getOldestPlayer());
+			}
+		});
+		btn_Oldes_Player.setBounds(444, 52, 154, 32);
 		frame.getContentPane().add(btn_Oldes_Player);
 		
 		JButton btn_Youngest_Player = new JButton("Youngest Player");
-		btn_Youngest_Player.setBounds(444, 156, 154, 32);
+		btn_Youngest_Player.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, espanha.getYoungestPlayer());
+			}
+		});
+		btn_Youngest_Player.setBounds(444, 89, 154, 32);
 		frame.getContentPane().add(btn_Youngest_Player);
 		
 		JButton btn_player_GetPlayer = new JButton("Get Player");
@@ -283,7 +301,13 @@ public class Presentation {
 		btn_Many_Members_1_1_2.setBounds(444, 340, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_1_1_2);
 		
-		JButton btn_Many_Members_1_2 = new JButton(" Many Members");
+		JButton btn_Many_Members_1_2 = new JButton(" Country Name");
+		btn_Many_Members_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, espanha.getCountryName());
+			}
+		});
 		btn_Many_Members_1_2.setBounds(444, 298, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_1_2);
 		
@@ -299,6 +323,19 @@ public class Presentation {
 		JLabel lblNewLabel_2 = new JLabel("Player Number");
 		lblNewLabel_2.setBounds(524, 233, 94, 13);
 		frame.getContentPane().add(lblNewLabel_2);
+		
+		JButton btn_player_averageAge = new JButton("Avarage Age");
+		btn_player_averageAge.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, espanha.getAverageAge());
+			}
+		});
+		btn_player_averageAge.setBounds(444, 126, 154, 32);
+		frame.getContentPane().add(btn_player_averageAge);
+		
+		JButton btn_Many_Members_2_1_1 = new JButton(" Many Members");
+		btn_Many_Members_2_1_1.setBounds(444, 163, 154, 32);
+		frame.getContentPane().add(btn_Many_Members_2_1_1);
 		
 		
 	}

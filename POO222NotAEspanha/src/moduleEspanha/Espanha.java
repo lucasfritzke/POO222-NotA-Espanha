@@ -131,8 +131,19 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public double getAverageAge() {
-		// TODO Auto-generated method stub
-		return 0;
+		double sumAge = 0;
+		double count = 0;
+		if(!players.isEmpty()) {
+			for (Player p : players.values()) {
+				sumAge += p.getAge();
+				count++;
+			}
+			
+			return sumAge / count;
+			
+		} else {
+			throw new IllegalArgumentException("There are no registered player");
+		}
 	}
 	
 	@Override
@@ -178,7 +189,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	BufferedImage bim = null;
 	try  {
 		bim = ImageIO.read(fl);
-		Image im = bim.getScaledInstance(450, 255, 255);
+		Image im = bim.getScaledInstance(1118, 788, 300);
 		
 		return im;
 	} catch (IOException e) {
