@@ -3,23 +3,23 @@ package moduleEspanha;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class PressOfficerContacts extends Person implements Serializable{
+public class TeamManager extends Person implements Serializable{
 	//Atributes
 	private String tel1;
 	private String tel2;
 	private String  emailAccount;
-	private boolean manager;
+	private boolean pressOfficer;
 	
 	//Constructors
-	public PressOfficerContacts() {
+	public TeamManager() {
 		super();
 	}
-	public PressOfficerContacts(String name,String tel1, String tel2, String email, boolean isManager) {
+	public TeamManager(String name,String tel1, String tel2, String email, boolean isPressOfficer) {
 		super(name);
 		setTel1(tel1);
 		setTel2(tel2);
 		setEmailAccount(email);
-		setManager(isManager);
+		setManager(isPressOfficer);
 	}
 
 	//Tel1
@@ -48,11 +48,11 @@ public class PressOfficerContacts extends Person implements Serializable{
 
 	}
 	// If IsManager = true this class is the press officer 
-	public boolean isManager() {
-		return manager;
+	public boolean isPressOfficer() {
+		return pressOfficer;
 	}
-	public void setManager(boolean manager) {
-		this.manager = manager;
+	public void setManager(boolean pressOfficer) {
+		this.pressOfficer = pressOfficer;
 	}
 	
 }

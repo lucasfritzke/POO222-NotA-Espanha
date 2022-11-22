@@ -36,7 +36,7 @@ import fifa.NationalTeamStats;
 public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializable {
 
 	private HashMap<String, Player> players = new HashMap<>();
-	private ArrayList<PressOfficerContacts> pressOfficerList = new ArrayList<>();
+	private ArrayList<TeamManager> teamManagerList = new ArrayList<>();
 	private ArrayList<TechnicalCommitteeMember> technicalMemberList = new ArrayList<>();
 	private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static String countryName = "Spain";
@@ -52,7 +52,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 				ObjectInputStream ois = new ObjectInputStream(fis)) {
 
 			players = (HashMap<String, Player>) ois.readObject();
-			pressOfficerList = (ArrayList<PressOfficerContacts>) ois.readObject();
+			teamManagerList = (ArrayList<TeamManager>) ois.readObject();
 			technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois.readObject();
 
 		} catch (FileNotFoundException e) {
@@ -68,7 +68,32 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		}
 
 	}
-
+	public void addTeamManager(String name,String tel1, String tel2, String email, boolean isPressOfficer) {
+		//If the user decides to insert one PressOfficer it will look by all the TeamManager List to see if there is one PressOfficer already
+		//and checks if the email is already in use
+		for(TeamManager tm : teamManagerList) {
+			if(isPressOfficer == true && tm.isPressOfficer() == true) {
+				throw new IllegalArgumentException("there is already one Press Officer");
+			}
+			if(email.equals(tm.getEmailAccount())) {
+				throw new IllegalArgumentException("this email is already in use");
+			}
+		}
+	//Adding team manager
+		TeamManager tm = new TeamManager(name,tel1,tel2,email,isPressOfficer);
+		teamManagerList.add(tm);
+	}
+	public void removeTeamManger(String email) {
+		// checks if the email exists, since the email is unique by user its used to delete the managers
+		for(TeamManager tm : teamManagerList) {
+			if(email.equals(tm.getEmailAccount())) {
+				teamManagerList.remove(tm);
+				return;
+			}
+		}
+		throw new IllegalArgumentException("No Team Manager with this email");
+	}
+	
 	public void addTCMember(String name, String nickname, String role, LocalDate birthDate) {
 		TechnicalCommitteeMember tcm = new TechnicalCommitteeMember(name, nickname, role, birthDate);
 		technicalMemberList.add(tcm);
@@ -192,8 +217,22 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public String getPressOfficerContacts() {
-		// TODO Auto-generated method stub
-		return null;
+		TeamManager tmTemporary = null;
+		for(TeamManager tm : teamManagerList) {
+			if(tm.isPressOfficer() == true) {
+				tmTemporary = tm;
+				break;
+			}
+		}
+		if(tmTemporary == null) {return null;}
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		JsonObject js = new JsonObject();
+		js.addProperty("name", tmTemporary.getName());
+		js.addProperty("cellphone1", tmTemporary.getTel1());
+		js.addProperty("cellphone2", tmTemporary.getTel2());
+		js.addProperty("email", tmTemporary.getEmailAccount());
+		String json = gson.toJson(js).toString();
+		return json;
 	}
 
 	@Override
@@ -275,7 +314,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		try (FileOutputStream fos = new FileOutputStream("dadosEspanha.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(players);
-			oos.writeObject(pressOfficerList);
+			oos.writeObject(teamManagerList);
 			oos.writeObject(technicalMemberList);
 
 		} catch (FileNotFoundException e) {

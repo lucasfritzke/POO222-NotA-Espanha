@@ -10,5 +10,11 @@
     "nickname": "Lc",
     "role": "aks",
     "birthDate": "2000-12-25"
+  },
+  {
+    "name": "Dia",
+    "nickname": "Dia",
+    "role": "Dia",
+    "birthDate": "2002-10-10"
   }
 ]

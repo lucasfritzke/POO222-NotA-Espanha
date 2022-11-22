@@ -41,12 +41,9 @@ public class Presentation {
 	private JTextField tf_tcm_birthdate;
 	private JTextField tf_tcm_name;
 	private JTextField tf_tcm_remove;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField tf_teamM_email;
+	private JTextField tf_teamM_name;
+	private JTextField tf_teamM_remove;
 	/**
 	 * Launch the application.
 	 */
@@ -339,7 +336,7 @@ public class Presentation {
 		panel_1.add(lblNewLabel_1_1_3_2_1);
 		
 		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("PressOfficer", null, panel_2, null);
+		tabbedPane.addTab("TeamManager", null, panel_2, null);
 		panel_2.setLayout(null);
 		
 		JPanel panel_1_1 = new JPanel();
@@ -357,73 +354,74 @@ public class Presentation {
 		lblNewLabel_1_1_3_3.setBounds(10, 88, 79, 13);
 		panel_1_1.add(lblNewLabel_1_1_3_3);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(92, 86, 176, 19);
-		panel_1_1.add(textField);
+		JTextField tf_teamM_cell1 = new JTextField();
+		tf_teamM_cell1.setColumns(10);
+		tf_teamM_cell1.setBounds(92, 86, 176, 19);
+		panel_1_1.add(tf_teamM_cell1);
 		
 		JLabel lblNewLabel_1_1_3_1_1 = new JLabel("Cellphone 2:");
 		lblNewLabel_1_1_3_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_1_3_1_1.setBounds(10, 112, 79, 13);
 		panel_1_1.add(lblNewLabel_1_1_3_1_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(92, 110, 176, 19);
-		panel_1_1.add(textField_1);
+		JTextField tf_teamM_cell2 = new JTextField();
+		tf_teamM_cell2.setColumns(10);
+		tf_teamM_cell2.setBounds(92, 110, 176, 19);
+		panel_1_1.add(tf_teamM_cell2);
 		
 		JLabel lblNewLabel_1_1_1_1_1_1_3_1 = new JLabel("Email:");
 		lblNewLabel_1_1_1_1_1_1_3_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_1_1_1_1_1_3_1.setBounds(10, 136, 93, 18);
 		panel_1_1.add(lblNewLabel_1_1_1_1_1_1_3_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(92, 137, 176, 19);
-		panel_1_1.add(textField_2);
+		tf_teamM_email = new JTextField();
+		tf_teamM_email.setColumns(10);
+		tf_teamM_email.setBounds(92, 137, 176, 19);
+		panel_1_1.add(tf_teamM_email);
 		
-		JButton btnCadastrarTCMember_1 = new JButton("Register");
-		btnCadastrarTCMember_1.setBounds(190, 189, 85, 21);
-		panel_1_1.add(btnCadastrarTCMember_1);
+		JButton btnCadastrarTM = new JButton("Register");
+		btnCadastrarTM.setBounds(203, 189, 85, 21);
+		panel_1_1.add(btnCadastrarTM);
 		
-		JButton btnRemoveTCM_1 = new JButton("Remove");
-		btnRemoveTCM_1.setBounds(148, 364, 85, 21);
-		panel_1_1.add(btnRemoveTCM_1);
+		JButton btnRemoveTM = new JButton("Remove");
+		btnRemoveTM.setBounds(148, 364, 85, 21);
+		panel_1_1.add(btnRemoveTM);
 		
 		JLabel lblNewLabel_1_1_3_2_2 = new JLabel("Name:");
 		lblNewLabel_1_1_3_2_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_1_3_2_2.setBounds(10, 64, 74, 13);
 		panel_1_1.add(lblNewLabel_1_1_3_2_2);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(92, 56, 176, 19);
-		panel_1_1.add(textField_3);
+		tf_teamM_name = new JTextField();
+		tf_teamM_name.setColumns(10);
+		tf_teamM_name.setBounds(92, 56, 176, 19);
+		panel_1_1.add(tf_teamM_name);
 		
 		JLabel lblRemoveTcmember_1 = new JLabel("Remove Team Manager");
 		lblRemoveTcmember_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblRemoveTcmember_1.setBounds(10, 302, 248, 33);
 		panel_1_1.add(lblRemoveTcmember_1);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(57, 334, 176, 19);
-		panel_1_1.add(textField_4);
+		tf_teamM_remove = new JTextField();
+		tf_teamM_remove.setColumns(10);
+		tf_teamM_remove.setBounds(57, 334, 176, 19);
+		panel_1_1.add(tf_teamM_remove);
 		
-		JLabel lblNewLabel_1_1_3_2_1_1 = new JLabel("Name:");
+		JLabel lblNewLabel_1_1_3_2_1_1 = new JLabel("Email");
 		lblNewLabel_1_1_3_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_1_3_2_1_1.setBounds(10, 336, 74, 13);
 		panel_1_1.add(lblNewLabel_1_1_3_2_1_1);
-		
-		textField_5 = new JTextField();
-		textField_5.setBounds(92, 166, 176, 20);
-		panel_1_1.add(textField_5);
-		textField_5.setColumns(10);
 		
 		JLabel lblNewLabel_1_1_1_1_1_1_3_1_1 = new JLabel("Press Officer:");
 		lblNewLabel_1_1_1_1_1_1_3_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_1_1_1_1_1_3_1_1.setBounds(10, 165, 93, 18);
 		panel_1_1.add(lblNewLabel_1_1_1_1_1_1_3_1_1);
+		
+		JComboBox<String> cbPositions_1 = new JComboBox<String>();
+		cbPositions_1.addItem("NO");
+		cbPositions_1.addItem("YES");
+		cbPositions_1.setBounds(92, 165, 110, 21);
+		panel_1_1.add(cbPositions_1);
 		
 		JButton btn_Many_Members = new JButton(" Many Members");
 		btn_Many_Members.addActionListener(new ActionListener() {
@@ -538,6 +536,10 @@ public class Presentation {
 		});
 		btn_getTechnicalCommittee.setBounds(444, 163, 154, 32);
 		frame.getContentPane().add(btn_getTechnicalCommittee);
+		
+		JButton btn_getPressOfficer = new JButton("PressOfficer");
+		btn_getPressOfficer.setBounds(444, 380, 154, 32);
+		frame.getContentPane().add(btn_getPressOfficer);
 		
 		
 	}
