@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.google.gson.JsonArray"/>
-    <fullyQualifiedTypeName name="com.google.gson.stream.JsonWriter"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="javax.imageio.stream.ImageOutputStreamImpl"/>
     <fullyQualifiedTypeName name="java.io.File"/>
@@ -11,5 +9,13 @@
     <fullyQualifiedTypeName name="javax.imageio.stream.ImageInputStream"/>
     <fullyQualifiedTypeName name="javax.imageio.plugins.jpeg.JPEGImageReadParam"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+    <fullyQualifiedTypeName name="moduleEspanha.Player"/>
+    <fullyQualifiedTypeName name="com.google.gson.JsonArray"/>
+    <fullyQualifiedTypeName name="moduleEspanha.TechnicalCommitteeMember"/>
+    <fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
+    <fullyQualifiedTypeName name="com.google.gson.stream.JsonWriter"/>
+    <fullyQualifiedTypeName name="java.io.FileWriter"/>
+    <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+    <fullyQualifiedTypeName name="java.nio.file.Path"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>
