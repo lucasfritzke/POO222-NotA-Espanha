@@ -6,6 +6,7 @@ import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -527,9 +528,16 @@ public class Presentation {
 		btn_player_averageAge.setBounds(444, 126, 154, 32);
 		frame.getContentPane().add(btn_player_averageAge);
 		
-		JButton btn_Many_Members_2_1_1 = new JButton(" Many Members");
-		btn_Many_Members_2_1_1.setBounds(444, 163, 154, 32);
-		frame.getContentPane().add(btn_Many_Members_2_1_1);
+		JButton btn_getTechnicalCommittee = new JButton("Get Technical Committee");
+		btn_getTechnicalCommittee.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Path p =espanha.getTechnicalCommittee();
+				JOptionPane.showMessageDialog(null, p.toString());
+			}
+		});
+		btn_getTechnicalCommittee.setBounds(444, 163, 154, 32);
+		frame.getContentPane().add(btn_getTechnicalCommittee);
 		
 		
 	}

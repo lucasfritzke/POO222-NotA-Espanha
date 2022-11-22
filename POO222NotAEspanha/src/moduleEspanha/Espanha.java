@@ -1,10 +1,13 @@
 package moduleEspanha;
+
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -23,104 +26,106 @@ import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonWriter;
 
 import fifa.NationalTeamInfos;
 import fifa.NationalTeamStats;
 
 public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializable {
-	
+
 	private HashMap<String, Player> players = new HashMap<>();
 	private ArrayList<PressOfficerContacts> pressOfficerList = new ArrayList<>();
 	private ArrayList<TechnicalCommitteeMember> technicalMemberList = new ArrayList<>();
 	private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static String countryName = "Spain";
-	
+
 	public Espanha() {
 		super();
 		initizalize();
 	}
 
 	private void initizalize() {
-		
-			try(FileInputStream fis = new FileInputStream("dadosEspanha.dat");
-					ObjectInputStream ois = new ObjectInputStream(fis)) {
-				
-				players = (HashMap<String, Player>)ois.readObject();
-				pressOfficerList = (ArrayList<PressOfficerContacts>)ois.readObject();
-				technicalMemberList = (ArrayList<TechnicalCommitteeMember>)ois.readObject();
-				
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				JOptionPane.showMessageDialog(null,"Primeira execu��o. Arquivo ainda n�o existe.");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-		
-	}
-	
-	public void addTCMember(String name, String nickname, String role, LocalDate birthDate){
-			TechnicalCommitteeMember tcm = new TechnicalCommitteeMember( name,  nickname,  role,  birthDate);
-			technicalMemberList.add(tcm);
+
+		try (FileInputStream fis = new FileInputStream("dadosEspanha.dat");
+				ObjectInputStream ois = new ObjectInputStream(fis)) {
+
+			players = (HashMap<String, Player>) ois.readObject();
+			pressOfficerList = (ArrayList<PressOfficerContacts>) ois.readObject();
+			technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois.readObject();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Primeira execu��o. Arquivo ainda n�o existe.");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+	}
+
+	public void addTCMember(String name, String nickname, String role, LocalDate birthDate) {
+		TechnicalCommitteeMember tcm = new TechnicalCommitteeMember(name, nickname, role, birthDate);
+		technicalMemberList.add(tcm);
+	}
+
 	public void removeTCMember(String name) {
-		int verificator = 0;
-		for(TechnicalCommitteeMember tcm : technicalMemberList) {
-			if(tcm.getName().equals(name)) {
-				verificator++;
+		for (TechnicalCommitteeMember tcm : technicalMemberList) {
+			if (tcm.getName().equals(name)) {
 				technicalMemberList.remove(tcm);
+				return;
 			}
 		}
-		if(verificator == 0) {throw new IllegalArgumentException("No TCMember with this name"); }
-	
+		throw new IllegalArgumentException("No TCMember with this name");
+
 	}
-	public void addPlayer(String name, String number, String nickName, double heigth, 
-			double weigth, LocalDate birthDate, String position,String currentClub) {
-		if(number != null && !players.containsKey(number)) {
+
+	public void addPlayer(String name, String number, String nickName, double heigth, double weigth,
+			LocalDate birthDate, String position, String currentClub) {
+		if (number != null && !players.containsKey(number)) {
 			Player p = new Player(name, number, nickName, heigth, weigth, birthDate, position, currentClub);
 			players.put(p.getNumber(), p);
 		} else {
 			throw new IllegalArgumentException("number to play already used");
 		}
-		
+
 	}
-	
+
 	public void removePlayer(String number) {
-		if(number != null && players.containsKey(number)) {
-			Player p =players.get(number);
+		if (number != null && players.containsKey(number)) {
+			Player p = players.get(number);
 			players.remove(number);
-			JOptionPane.showMessageDialog(null, "Player "+ p.getName()+ "successfully removed");
+			JOptionPane.showMessageDialog(null, "Player " + p.getName() + "successfully removed");
 		} else {
 			throw new IllegalArgumentException("player does not exist");
 		}
 	}
-	
+
 	@Override
 	public int getHowManyMembers() {
-		
-		int manyMembers=0;
+
+		int manyMembers = 0;
 		manyMembers += players.size(); // Quantos jogadores tem cadastrado
 		return manyMembers;
-		
+
 	}
 
 	@Override
 	public int getOldestPlayer() {
-		int olderPlayer=0;
-		if(!players.isEmpty()) {
-			
-			for (Player p : players.values()) {	
-				if(p.getAge() > olderPlayer){
+		int olderPlayer = 0;
+		if (!players.isEmpty()) {
+
+			for (Player p : players.values()) {
+				if (p.getAge() > olderPlayer) {
 					olderPlayer = p.getAge();
 				}
 			}
-			
+
 		} else {
 			throw new IllegalArgumentException("There are no registered player");
 		}
@@ -130,14 +135,14 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	@Override
 	public int getYoungestPlayer() {
 		int youngesPlayer = -1;
-		if(!players.isEmpty()) {
-			
+		if (!players.isEmpty()) {
+
 			for (Player p : players.values()) {
-				if(youngesPlayer == -1 || p.getAge() < youngesPlayer){
+				if (youngesPlayer == -1 || p.getAge() < youngesPlayer) {
 					youngesPlayer = p.getAge();
 				}
 			}
-			
+
 		} else {
 			throw new IllegalArgumentException("There are no registered player");
 		}
@@ -148,23 +153,23 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	public double getAverageAge() {
 		double sumAge = 0;
 		double count = 0;
-		if(!players.isEmpty()) {
+		if (!players.isEmpty()) {
 			for (Player p : players.values()) {
 				sumAge += p.getAge();
 				count++;
 			}
-			
+
 			return sumAge / count;
-			
+
 		} else {
 			throw new IllegalArgumentException("There are no registered player");
 		}
 	}
-	
+
 	@Override
 	public String getPlayer(int number) {
-		
-		if(players.containsKey(Integer.toString(number))) {
+
+		if (players.containsKey(Integer.toString(number))) {
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			Player p = players.get(Integer.toString(number));
 			JsonObject js = new JsonObject();
@@ -179,7 +184,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			js.addProperty("currentClub", p.getCurrentClub());
 			String json = gson.toJson(js).toString();
 			return json;
-			
+
 		} else {
 			return null;
 		}
@@ -199,26 +204,47 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public Image getFlagImage() {
-		
-	File fl = new File("countryFlag.jpg");
-	BufferedImage bim = null;
-	try  {
-		bim = ImageIO.read(fl);
-		Image im = bim.getScaledInstance(1118, 788, 300);
-		
-		return im;
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-		
+
+		File fl = new File("countryFlag.jpg");
+		BufferedImage bim = null;
+		try {
+			bim = ImageIO.read(fl);
+			Image im = bim.getScaledInstance(1118, 788, 300);
+
+			return im;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 
 	@Override
 	public Path getTechnicalCommittee() {
-		// TODO Auto-generated method stub
-		return null;
+		File fl = new File("TechnicalCommittee.json");
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		JsonArray jsa = new JsonArray();
+		
+		for (TechnicalCommitteeMember tmt : technicalMemberList) {
+			JsonObject jsn = new JsonObject();
+			jsn.addProperty("name", tmt.getName());
+			jsn.addProperty("nickname", tmt.getNickname());
+			jsn.addProperty("role", tmt.getRole());
+			jsn.addProperty("birthDate", df.format(tmt.getBirthDate()));
+			jsa.add(jsn);
+		}
+		
+		try(FileWriter fw = new FileWriter(fl);) {
+			//BufferedWriter bw = new BufferedWriter(fw);
+			//bw.write(gson.toJson(jsa).toString());
+			fw.write(gson.toJson(jsa).toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return Path.of(fl.toString());
 	}
 
 	@Override
@@ -238,20 +264,20 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public ArrayList<String> getPositionsList() {
 		Player p = new Player();
 		return p.getPositionsList();
 	}
-	
+
 	public void salvar() {
-		
+
 		try (FileOutputStream fos = new FileOutputStream("dadosEspanha.dat");
-				ObjectOutputStream oos = new ObjectOutputStream(fos)){
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(players);
 			oos.writeObject(pressOfficerList);
 			oos.writeObject(technicalMemberList);
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -259,7 +285,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 	}
 
 }

@@ -60,4 +60,6 @@ class EspanhaTest {
 		Espanha e = new Espanha();
 		assertThrows(IllegalArgumentException.class, () -> e.getYoungestPlayer()); // Não há nenhum jogador adicionado
 	}
+	
+	
 }
