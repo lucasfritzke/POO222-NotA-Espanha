@@ -379,11 +379,45 @@ public class Presentation {
 		tf_teamM_email.setBounds(92, 137, 176, 19);
 		panel_1_1.add(tf_teamM_email);
 		
+		JComboBox<String> cbPositions_1 = new JComboBox<String>();
+		cbPositions_1.addItem("NO");
+		cbPositions_1.addItem("YES");
+		cbPositions_1.setBounds(92, 165, 110, 21);
+		panel_1_1.add(cbPositions_1);
+		
 		JButton btnCadastrarTM = new JButton("Register");
+		btnCadastrarTM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String opcao = (String)cbPositions_1.getSelectedItem();
+				System.out.println(opcao);
+				boolean opcaoPOfficer = false;
+				if(opcao.equals("YES") || opcao.equals("yes")){
+					opcaoPOfficer = true;
+				}
+				try {
+					espanha.addTeamManager(tf_teamM_name.getText(), tf_teamM_cell1.getText(), tf_teamM_cell2.getText()
+							, tf_teamM_email.getText()
+							,opcaoPOfficer);;
+					JOptionPane.showMessageDialog(null, " added Team Manager successfully");
+				} catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+			}
+		});
 		btnCadastrarTM.setBounds(203, 189, 85, 21);
 		panel_1_1.add(btnCadastrarTM);
 		
 		JButton btnRemoveTM = new JButton("Remove");
+		btnRemoveTM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					espanha.removeTeamManger(tf_teamM_remove.getText());
+					JOptionPane.showMessageDialog(null, " removed Team Manager successfully");
+				} catch (IllegalArgumentException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage());
+				}
+			}
+		});
 		btnRemoveTM.setBounds(148, 364, 85, 21);
 		panel_1_1.add(btnRemoveTM);
 		
@@ -417,11 +451,7 @@ public class Presentation {
 		lblNewLabel_1_1_1_1_1_1_3_1_1.setBounds(10, 165, 93, 18);
 		panel_1_1.add(lblNewLabel_1_1_1_1_1_1_3_1_1);
 		
-		JComboBox<String> cbPositions_1 = new JComboBox<String>();
-		cbPositions_1.addItem("NO");
-		cbPositions_1.addItem("YES");
-		cbPositions_1.setBounds(92, 165, 110, 21);
-		panel_1_1.add(cbPositions_1);
+		
 		
 		JButton btn_Many_Members = new JButton(" Many Members");
 		btn_Many_Members.addActionListener(new ActionListener() {
@@ -538,6 +568,11 @@ public class Presentation {
 		frame.getContentPane().add(btn_getTechnicalCommittee);
 		
 		JButton btn_getPressOfficer = new JButton("PressOfficer");
+		btn_getPressOfficer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, espanha.getPressOfficerContacts());
+			}
+		});
 		btn_getPressOfficer.setBounds(444, 380, 154, 32);
 		frame.getContentPane().add(btn_getPressOfficer);
 		
