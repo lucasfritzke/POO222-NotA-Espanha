@@ -1,20 +1,15 @@
 [
   {
-    "name": "Lucas",
-    "nickname": "asjdhj",
-    "role": "aksjdk",
-    "birthDate": "2000-12-25"
+    "name": "Luis Enrique Martínez",
+    "nickname": "Luis Enrique",
+    "role": "Main Coach",
+    "birthDate": "1970-05-08"
   },
   {
-    "name": "Lucas",
-    "nickname": "Lc",
-    "role": "aks",
-    "birthDate": "2000-12-25"
-  },
-  {
-    "name": "Dia",
-    "nickname": "Dia",
-    "role": "Dia",
     "birthDate": "2002-10-10"
+    "name": "John Avila Garcez",
+    "nickname": "Garcez",
+    "role": "Assistant Coach",
+    "birthDate": "1975-02-03"
   }
 ]
