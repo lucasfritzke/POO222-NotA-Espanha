@@ -1,4 +1,4 @@
-package moduleEspanha;
+package module_espanha;
 
 import java.io.Serializable;
 

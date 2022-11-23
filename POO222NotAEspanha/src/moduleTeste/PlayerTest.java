@@ -3,7 +3,8 @@ package moduleTeste;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
-import moduleEspanha.Player;
+
+import module_espanha.Player;
 
 class PlayerTest {
 	

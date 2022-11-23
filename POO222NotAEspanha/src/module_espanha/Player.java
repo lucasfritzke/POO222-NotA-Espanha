@@ -1,4 +1,4 @@
-package moduleEspanha;
+package module_espanha;
 
 import java.awt.Component;
 import java.io.Serializable;

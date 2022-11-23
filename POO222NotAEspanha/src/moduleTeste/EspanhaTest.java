@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import moduleEspanha.Espanha;
-import moduleEspanha.Player;
+import module_espanha.Espanha;
+import module_espanha.Player;
 
 class EspanhaTest {
 
