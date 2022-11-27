@@ -3,7 +3,6 @@ package module_espanha;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.net.URL;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,16 +43,9 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	private void initizalize() {
 
-	/*
-		//FileInputStream fis = new FileInputStream("dadosEspanha.dat");
-		try ( ObjectInputStream ois1 = (ObjectInputStream) getClass().getResourceAsStream("\\arquivos_espanha\\dadosManyQuestions.dat");
-			  ObjectInputStream ois2 = (ObjectInputStream) getClass().getResourceAsStream("\\arquivos_espanha\\dadosTechnicalCommitee.dat");
-			  ObjectInputStream ois3 = (ObjectInputStream) getClass().getResourceAsStream("\\arquivos_espanha\\dadosTeamManager.dat");
-			 ObjectInputStream ois4 = (ObjectInputStream) getClass().getResourceAsStream("\\arquivos_espanha\\dadosPlayers.dat");) {
-			players = (HashMap<String, Player>) ois4.readObject();
-			teamManagerList = (ArrayList<TeamManager>) ois3.readObject();
-			technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois2.readObject();
-			manyQuestions = ois1.read();
+		try {
+			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosPlayers.dat"));
+			players = (HashMap<String, Player>) ois.readObject();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -66,7 +57,50 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-*/
+		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTechnicalMember.dat"));
+			technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois.readObject();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTeamManager.dat"));
+			teamManagerList = (ArrayList<TeamManager>) ois.readObject();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosManyQuestions.dat"));
+			manyQuestions = ois.read();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		
+
 	}
 
 	public void addTeamManager(String name, String tel1, String tel2, String email, boolean isPressOfficer) {
@@ -331,7 +365,8 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	
 	public void salvar() {
 		
-		try (FileOutputStream fos = new FileOutputStream("scr/arquivos_espanha/dadosPlayers.dat");
+		
+		try (	FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosPlayers.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			
 			oos.writeObject(players); 
@@ -344,12 +379,10 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			e1.printStackTrace();
 		}
 		
-		/*
-		try (FileOutputStream fos = new FileOutputStream("\\src\\arquivos_espanha\\dadosTeamManager.dat");
+		
+		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosTeamManager.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
 			oos.writeObject(teamManagerList);
-			oos.writeObject(technicalMemberList);
-			oos.write(manyQuestions);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -360,10 +393,9 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		}
 		
 		
-		try (FileOutputStream fos = new FileOutputStream("\\src\\arquivos_espanha\\dadosTechnicalCommitee.dat");
+		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosTechnicalMember.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
 			oos.writeObject(technicalMemberList);
-			oos.write(manyQuestions);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -374,9 +406,9 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		}
 		
 		
-		try (FileOutputStream fos = new FileOutputStream("\\src\\arquivos_espanha\\dadosManyQuestions.dat");
+		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosManyQuestions.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
-			oos.write(manyQuestions);
+			oos.write(this.manyQuestions);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -384,20 +416,8 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		
-		
-		
-		
-		
-		*/
+		}	
 
-	}
-	
-	@Override
-	protected void finalize() throws Throwable {
-		salvar();
-		super.finalize();
 	}
 
 }
