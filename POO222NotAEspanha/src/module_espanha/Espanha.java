@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.URL;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -44,20 +45,20 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	private void initizalize() {
 
-	
-
-		try (FileInputStream fis = new FileInputStream("dadosEspanha.dat");
-				ObjectInputStream ois = new ObjectInputStream(fis)) {
-
-			players = (HashMap<String, Player>) ois.readObject();
-			teamManagerList = (ArrayList<TeamManager>) ois.readObject();
-			technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois.readObject();
-			manyQuestions = ois.read();
+	/*
+		//FileInputStream fis = new FileInputStream("dadosEspanha.dat");
+		try ( ObjectInputStream ois1 = (ObjectInputStream) getClass().getResourceAsStream("\\arquivos_espanha\\dadosManyQuestions.dat");
+			  ObjectInputStream ois2 = (ObjectInputStream) getClass().getResourceAsStream("\\arquivos_espanha\\dadosTechnicalCommitee.dat");
+			  ObjectInputStream ois3 = (ObjectInputStream) getClass().getResourceAsStream("\\arquivos_espanha\\dadosTeamManager.dat");
+			 ObjectInputStream ois4 = (ObjectInputStream) getClass().getResourceAsStream("\\arquivos_espanha\\dadosPlayers.dat");) {
+			players = (HashMap<String, Player>) ois4.readObject();
+			teamManagerList = (ArrayList<TeamManager>) ois3.readObject();
+			technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois2.readObject();
+			manyQuestions = ois1.read();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Primeira execu��o. Arquivo ainda n�o existe.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,7 +66,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+*/
 	}
 
 	public void addTeamManager(String name, String tel1, String tel2, String email, boolean isPressOfficer) {
@@ -327,11 +328,25 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		return p.getPositionsList();
 	}
 
+	
 	public void salvar() {
-
-		try (FileOutputStream fos = new FileOutputStream("dadosEspanha.dat");
+		
+		try (FileOutputStream fos = new FileOutputStream("scr/arquivos_espanha/dadosPlayers.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+			
 			oos.writeObject(players); 
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		/*
+		try (FileOutputStream fos = new FileOutputStream("\\src\\arquivos_espanha\\dadosTeamManager.dat");
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
 			oos.writeObject(teamManagerList);
 			oos.writeObject(technicalMemberList);
 			oos.write(manyQuestions);
@@ -343,9 +358,42 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		
+		try (FileOutputStream fos = new FileOutputStream("\\src\\arquivos_espanha\\dadosTechnicalCommitee.dat");
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
+			oos.writeObject(technicalMemberList);
+			oos.write(manyQuestions);
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		try (FileOutputStream fos = new FileOutputStream("\\src\\arquivos_espanha\\dadosManyQuestions.dat");
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
+			oos.write(manyQuestions);
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		*/
 
 	}
-
+	
 	@Override
 	protected void finalize() throws Throwable {
 		salvar();
