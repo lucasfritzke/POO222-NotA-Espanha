@@ -2,7 +2,6 @@ package module_espanha;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,16 +18,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
-import javax.imageio.plugins.jpeg.JPEGImageReadParam;
-import javax.imageio.stream.ImageInputStream;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonWriter;
 
 import fifa.NationalTeamInfos;
 import fifa.NationalTeamStats;
@@ -308,7 +303,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		Player p = new Player();
 		return p.getPositionsList();
 	}
-
+	
 	public void salvar() {
 
 		try (FileOutputStream fos = new FileOutputStream("dadosEspanha.dat");
@@ -326,5 +321,14 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		}
 
 	}
+	
+
+	@Override
+	protected void finalize() throws Throwable {
+		salvar();
+		super.finalize();
+	}
+	
+	
 
 }
