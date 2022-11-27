@@ -511,7 +511,7 @@ public class Presentation {
 						"successfully saved changes");
 			}
 		});
-		btn_Save.setBounds(444, 437, 154, 32);
+		btn_Save.setBounds(444, 459, 154, 32);
 		frame.getContentPane().add(btn_Save);
 		
 		JButton btn_Many_Members_1_1_2 = new JButton("Flag Image");
@@ -523,7 +523,7 @@ public class Presentation {
 				JOptionPane.showMessageDialog(null, ima );
 			}
 		});
-		btn_Many_Members_1_1_2.setBounds(444, 340, 154, 32);
+		btn_Many_Members_1_1_2.setBounds(444, 363, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_1_1_2);
 		
 		JButton btn_Many_Members_1_2 = new JButton(" Country Name");
@@ -533,7 +533,7 @@ public class Presentation {
 				JOptionPane.showMessageDialog(null, espanha.getCountryName());
 			}
 		});
-		btn_Many_Members_1_2.setBounds(444, 298, 154, 32);
+		btn_Many_Members_1_2.setBounds(444, 321, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_1_2);
 		
 		JButton btn_Many_Members_2 = new JButton(" Many Questions");
@@ -544,7 +544,7 @@ public class Presentation {
 				JOptionPane.showMessageDialog(null, n.getHowManyQuestions());
 			}
 		});
-		btn_Many_Members_2.setBounds(444, 256, 154, 32);
+		btn_Many_Members_2.setBounds(444, 279, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_2);
 		
 		tf_getPlayer = new JTextField();
@@ -582,8 +582,19 @@ public class Presentation {
 				JOptionPane.showMessageDialog(null, espanha.getPressOfficerContacts());
 			}
 		});
-		btn_getPressOfficer.setBounds(444, 380, 154, 32);
+		btn_getPressOfficer.setBounds(444, 403, 154, 32);
 		frame.getContentPane().add(btn_getPressOfficer);
+		
+		JButton btn_player_GetPlayer_1 = new JButton("Question Player");
+		btn_player_GetPlayer_1.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btn_player_GetPlayer_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			NationalTeamStats n = espanha.getStatsResponsible();
+			JOptionPane.showMessageDialog(null, n.getHowManyCallsToPlayer(Integer.parseInt(tf_getPlayer.getText())));
+			}
+		});
+		btn_player_GetPlayer_1.setBounds(429, 243, 94, 26);
+		frame.getContentPane().add(btn_player_GetPlayer_1);
 		
 		
 	}

@@ -218,7 +218,6 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			players.put(p.getNumber(), p);
 			String json = gson.toJson(js).toString();
 			return json;
-
 		} else {
 			return null;
 		}
@@ -310,10 +309,19 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public String getHowManyCallsToPlayer(int number) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(players.containsKey(Integer.toString(number))) {
+			Player p = players.get(Integer.toString(number));
+			return Integer.toString(p.getHowManyQuestions());
+		} else {
+			return null;
+		}
+		
 	}
 
+	
+	
+	
 	public ArrayList<String> getPositionsList() {
 		Player p = new Player();
 		return p.getPositionsList();
