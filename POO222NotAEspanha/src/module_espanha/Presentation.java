@@ -22,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import fifa.NationalTeamStats;
+
 public class Presentation {
 
 	private JFrame frame;
@@ -534,7 +536,14 @@ public class Presentation {
 		btn_Many_Members_1_2.setBounds(444, 298, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_1_2);
 		
-		JButton btn_Many_Members_2 = new JButton(" Many Members");
+		JButton btn_Many_Members_2 = new JButton(" Many Questions");
+		btn_Many_Members_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				NationalTeamStats n = espanha.getStatsResponsible();
+				JOptionPane.showMessageDialog(null, n.getHowManyQuestions());
+			}
+		});
 		btn_Many_Members_2.setBounds(444, 256, 154, 32);
 		frame.getContentPane().add(btn_Many_Members_2);
 		

@@ -35,6 +35,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	private ArrayList<TechnicalCommitteeMember> technicalMemberList = new ArrayList<>();
 	private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static String countryName = "Spain";
+	public int manyQuestions = 0;
 
 	public Espanha() {
 		super();
@@ -43,12 +44,15 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	private void initizalize() {
 
+	
+
 		try (FileInputStream fis = new FileInputStream("dadosEspanha.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis)) {
 
 			players = (HashMap<String, Player>) ois.readObject();
 			teamManagerList = (ArrayList<TeamManager>) ois.readObject();
 			technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois.readObject();
+			manyQuestions = ois.read();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -63,32 +67,36 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		}
 
 	}
-	public void addTeamManager(String name,String tel1, String tel2, String email, boolean isPressOfficer) {
-		//If the user decides to insert one PressOfficer it will look by all the TeamManager List to see if there is one PressOfficer already
-		//and checks if the email is already in use
-		for(TeamManager tm : teamManagerList) {
-			if(isPressOfficer == true && tm.isPressOfficer() == true) {
+
+	public void addTeamManager(String name, String tel1, String tel2, String email, boolean isPressOfficer) {
+		// If the user decides to insert one PressOfficer it will look by all the
+		// TeamManager List to see if there is one PressOfficer already
+		// and checks if the email is already in use
+		for (TeamManager tm : teamManagerList) {
+			if (isPressOfficer == true && tm.isPressOfficer() == true) {
 				throw new IllegalArgumentException("there is already one Press Officer");
 			}
-			if(email.equals(tm.getEmailAccount())) {
+			if (email.equals(tm.getEmailAccount())) {
 				throw new IllegalArgumentException("this email is already in use");
 			}
 		}
-	//Adding team manager
-		TeamManager tm = new TeamManager(name,tel1,tel2,email,isPressOfficer);
+		// Adding team manager
+		TeamManager tm = new TeamManager(name, tel1, tel2, email, isPressOfficer);
 		teamManagerList.add(tm);
 	}
+
 	public void removeTeamManger(String email) {
-		// checks if the email exists, since the email is unique by user its used to delete the managers
-		for(TeamManager tm : teamManagerList) {
-			if(email.equals(tm.getEmailAccount())) {
+		// checks if the email exists, since the email is unique by user its used to
+		// delete the managers
+		for (TeamManager tm : teamManagerList) {
+			if (email.equals(tm.getEmailAccount())) {
 				teamManagerList.remove(tm);
 				return;
 			}
 		}
 		throw new IllegalArgumentException("No Team Manager with this email");
 	}
-	
+
 	public void addTCMember(String name, String nickname, String role, LocalDate birthDate) {
 		TechnicalCommitteeMember tcm = new TechnicalCommitteeMember(name, nickname, role, birthDate);
 		technicalMemberList.add(tcm);
@@ -128,7 +136,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public int getHowManyMembers() {
-
+		manyQuestions++;
 		int manyMembers = 0;
 		manyMembers += players.size(); // Quantos jogadores tem cadastrado
 		return manyMembers;
@@ -137,6 +145,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public int getOldestPlayer() {
+		manyQuestions++;
 		int olderPlayer = 0;
 		if (!players.isEmpty()) {
 
@@ -145,15 +154,16 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 					olderPlayer = p.getAge();
 				}
 			}
-
+			return olderPlayer;
 		} else {
-			throw new IllegalArgumentException("There are no registered player");
+			return 0;
 		}
-		return olderPlayer;
+
 	}
 
 	@Override
 	public int getYoungestPlayer() {
+		manyQuestions++;
 		int youngesPlayer = -1;
 		if (!players.isEmpty()) {
 
@@ -161,16 +171,18 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 				if (youngesPlayer == -1 || p.getAge() < youngesPlayer) {
 					youngesPlayer = p.getAge();
 				}
-			}
 
+			}
+			return youngesPlayer;
 		} else {
-			throw new IllegalArgumentException("There are no registered player");
+			return 0;
 		}
-		return youngesPlayer;
+
 	}
 
 	@Override
 	public double getAverageAge() {
+		manyQuestions++;
 		double sumAge = 0;
 		double count = 0;
 		if (!players.isEmpty()) {
@@ -182,13 +194,13 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			return sumAge / count;
 
 		} else {
-			throw new IllegalArgumentException("There are no registered player");
+			return 0;
 		}
 	}
 
 	@Override
 	public String getPlayer(int number) {
-
+		manyQuestions++;
 		if (players.containsKey(Integer.toString(number))) {
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			Player p = players.get(Integer.toString(number));
@@ -202,6 +214,8 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			js.addProperty("position", p.getPosition());
 			js.addProperty("number: ", p.getNumber());
 			js.addProperty("currentClub", p.getCurrentClub());
+			p.countQuestion();
+			players.put(p.getNumber(), p);
 			String json = gson.toJson(js).toString();
 			return json;
 
@@ -212,14 +226,17 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public String getPressOfficerContacts() {
+		manyQuestions++;
 		TeamManager tmTemporary = null;
-		for(TeamManager tm : teamManagerList) {
-			if(tm.isPressOfficer() == true) {
+		for (TeamManager tm : teamManagerList) {
+			if (tm.isPressOfficer() == true) {
 				tmTemporary = tm;
 				break;
 			}
 		}
-		if(tmTemporary == null) {return null;}
+		if (tmTemporary == null) {
+			return null;
+		}
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		JsonObject js = new JsonObject();
 		js.addProperty("name", tmTemporary.getName());
@@ -232,34 +249,33 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public String getCountryName() {
-		// TODO Auto-generated method stub
+		manyQuestions++;
 		return this.countryName;
 	}
 
 	@Override
 	public Image getFlagImage() {
-
+		manyQuestions++;
 		File fl = new File("countryFlag.jpg");
 		BufferedImage bim = null;
 		try {
 			bim = ImageIO.read(fl);
 			Image im = bim.getScaledInstance(1118, 788, 300);
-
 			return im;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 
 	@Override
 	public Path getTechnicalCommittee() {
+		manyQuestions++;
 		File fl = new File("TechnicalCommittee.json");
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		JsonArray jsa = new JsonArray();
-		
+
 		for (TechnicalCommitteeMember tmt : technicalMemberList) {
 			JsonObject jsn = new JsonObject();
 			jsn.addProperty("name", tmt.getName());
@@ -268,29 +284,28 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			jsn.addProperty("birthDate", df.format(tmt.getBirthDate()));
 			jsa.add(jsn);
 		}
-		
-		try(FileWriter fw = new FileWriter(fl);) {
-			//BufferedWriter bw = new BufferedWriter(fw);
-			//bw.write(gson.toJson(jsa).toString());
+
+		try (FileWriter fw = new FileWriter(fl);) {
+			// BufferedWriter bw = new BufferedWriter(fw);
+			// bw.write(gson.toJson(jsa).toString());
 			fw.write(gson.toJson(jsa).toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return Path.of(fl.toString());
 	}
 
 	@Override
 	public NationalTeamStats getStatsResponsible() {
-		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	@Override
 	public int getHowManyQuestions() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.manyQuestions;
 	}
 
 	@Override
@@ -303,14 +318,15 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		Player p = new Player();
 		return p.getPositionsList();
 	}
-	
+
 	public void salvar() {
 
 		try (FileOutputStream fos = new FileOutputStream("dadosEspanha.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			oos.writeObject(players);
+			oos.writeObject(players); 
 			oos.writeObject(teamManagerList);
 			oos.writeObject(technicalMemberList);
+			oos.write(manyQuestions);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -321,14 +337,11 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		}
 
 	}
-	
 
 	@Override
 	protected void finalize() throws Throwable {
 		salvar();
 		super.finalize();
 	}
-	
-	
 
 }
