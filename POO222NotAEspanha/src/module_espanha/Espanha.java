@@ -290,10 +290,10 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	@Override
 	public Image getFlagImage() {
 		manyQuestions++;
-		File fl = new File("countryFlag.jpg");
+		
 		BufferedImage bim = null;
 		try {
-			bim = ImageIO.read(fl);
+			bim = ImageIO.read(getClass().getResourceAsStream("/arquivos_espanha/countryFlag.jpg"));
 			Image im = bim.getScaledInstance(1118, 788, 300);
 			return im;
 		} catch (IOException e) {
