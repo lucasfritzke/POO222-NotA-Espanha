@@ -34,7 +34,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	private ArrayList<TechnicalCommitteeMember> technicalMemberList = new ArrayList<>();
 	private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static String countryName = "Spain";
-	public int manyQuestions = 0;
+	private int manyQuestions;
 
 	public Espanha() {
 		super();
@@ -45,7 +45,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 		try {
 			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosPlayers.dat"));
-			players = (HashMap<String, Player>) ois.readObject();
+			this.players = (HashMap<String, Player>) ois.readObject();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -60,7 +60,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		
 		try {
 			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTechnicalMember.dat"));
-			technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois.readObject();
+			this.technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois.readObject();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -76,7 +76,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		
 		try {
 			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTeamManager.dat"));
-			teamManagerList = (ArrayList<TeamManager>) ois.readObject();
+			this.teamManagerList = (ArrayList<TeamManager>) ois.readObject();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,7 +90,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		
 		try {
 			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosManyQuestions.dat"));
-			manyQuestions = ois.read();
+			this.manyQuestions = ois.read();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -171,7 +171,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public int getHowManyMembers() {
-		manyQuestions++;
+		this.manyQuestions++;
 		int manyMembers = 0;
 		manyMembers += players.size(); // Quantos jogadores tem cadastrado
 		return manyMembers;
@@ -180,7 +180,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public int getOldestPlayer() {
-		manyQuestions++;
+		this.manyQuestions++;
 		int olderPlayer = 0;
 		if (!players.isEmpty()) {
 
@@ -198,7 +198,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public int getYoungestPlayer() {
-		manyQuestions++;
+		this.manyQuestions++;
 		int youngesPlayer = -1;
 		if (!players.isEmpty()) {
 
@@ -217,7 +217,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public double getAverageAge() {
-		manyQuestions++;
+		this.manyQuestions++;
 		double sumAge = 0;
 		double count = 0;
 		if (!players.isEmpty()) {
@@ -235,7 +235,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public String getPlayer(int number) {
-		manyQuestions++;
+		this.manyQuestions++;
 		if (players.containsKey(Integer.toString(number))) {
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			Player p = players.get(Integer.toString(number));
@@ -260,7 +260,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public String getPressOfficerContacts() {
-		manyQuestions++;
+		this.manyQuestions++;
 		TeamManager tmTemporary = null;
 		for (TeamManager tm : teamManagerList) {
 			if (tm.isPressOfficer() == true) {
@@ -289,7 +289,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public Image getFlagImage() {
-		manyQuestions++;
+		this.manyQuestions++;
 		
 		BufferedImage bim = null;
 		try {
@@ -305,7 +305,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 
 	@Override
 	public Path getTechnicalCommittee() {
-		manyQuestions++;
+		this.manyQuestions++;
 		File fl = new File("TechnicalCommittee.json");
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		JsonArray jsa = new JsonArray();

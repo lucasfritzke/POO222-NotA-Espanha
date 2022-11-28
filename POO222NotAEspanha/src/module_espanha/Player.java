@@ -1,12 +1,10 @@
 package module_espanha;
 
-import java.awt.Component;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class Player extends Person implements Serializable {
 
@@ -132,11 +130,11 @@ public class Player extends Person implements Serializable {
 	}
 
 	public int getHowManyQuestions() {
-		return howManyQuestions;
+		return this.howManyQuestions;
 	}
 
 	public void countQuestion() {
-		this.howManyQuestions++;
+		this.howManyQuestions += 1;
 	}
 
 	public String getPosition() {
