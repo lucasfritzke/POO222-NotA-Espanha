@@ -34,7 +34,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	private ArrayList<TechnicalCommitteeMember> technicalMemberList = new ArrayList<>();
 	private DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static String countryName = "Spain";
-	private int manyQuestions;
+	private Integer manyQuestions;
 
 	public Espanha() {
 		super();
@@ -90,11 +90,14 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		
 		try {
 			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosManyQuestions.dat"));
-			this.manyQuestions = ois.read();
+			this.manyQuestions = (Integer) ois.readObject();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
@@ -408,7 +411,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		
 		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosManyQuestions.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
-			oos.write(this.manyQuestions);
+			oos.writeObject(this.manyQuestions);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
