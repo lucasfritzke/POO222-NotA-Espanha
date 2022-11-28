@@ -372,7 +372,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		try (	FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosPlayers.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			
-			oos.writeObject(players); 
+			oos.writeObject(this.players); 
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -385,7 +385,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		
 		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosTeamManager.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
-			oos.writeObject(teamManagerList);
+			oos.writeObject(this.teamManagerList);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -398,7 +398,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		
 		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosTechnicalMember.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
-			oos.writeObject(technicalMemberList);
+			oos.writeObject(this.technicalMemberList);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -412,6 +412,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosManyQuestions.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
 			oos.writeObject(this.manyQuestions);
+			
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -422,5 +423,13 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		}	
 
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		// TODO Auto-generated method stub
+		this.salvar();
+	}
+	
+	
 
 }

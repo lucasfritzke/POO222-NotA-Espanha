@@ -36,7 +36,6 @@ public class Presentation {
 	private JTextField tf_player_currentClub;
 	private SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd");
 	private JTextField tf_player_number_remove;
-	private Espanha espanha = new Espanha();
 	private JTextField tf_getPlayer;
 	private JTextField tf_tcm_nickname;
 	private JTextField tf_tcm_role;
@@ -74,7 +73,7 @@ public class Presentation {
 	 */
 	private void initialize() {
 		
-		
+		Espanha espanha = new Espanha();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 653, 538);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
