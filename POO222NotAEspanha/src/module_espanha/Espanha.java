@@ -46,6 +46,15 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		try {
 			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosPlayers.dat"));
 			this.players = (HashMap<String, Player>) ois.readObject();
+			
+			ObjectInputStream ois1 = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTechnicalMember.dat"));
+			this.technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois1.readObject();
+			
+			ObjectInputStream ois2 = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTeamManager.dat"));
+			this.teamManagerList = (ArrayList<TeamManager>) ois2.readObject();
+			
+			ObjectInputStream ois3 = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosManyQuestions.dat"));
+			this.manyQuestions = (Integer) ois3.readObject();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -58,52 +67,6 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			e.printStackTrace();
 		}
 		
-		try {
-			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTechnicalMember.dat"));
-			this.technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois.readObject();
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		try {
-			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTeamManager.dat"));
-			this.teamManagerList = (ArrayList<TeamManager>) ois.readObject();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosManyQuestions.dat"));
-			this.manyQuestions = (Integer) ois.readObject();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		
-
 	}
 
 	public void addTeamManager(String name, String tel1, String tel2, String email, boolean isPressOfficer) {
@@ -356,8 +319,6 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		}
 		
 	}
-
-	
 	
 	
 	public ArrayList<String> getPositionsList() {
@@ -368,59 +329,31 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	
 	public void salvar() {
 		
-		
+		//player
 		try (	FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosPlayers.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			
 			oos.writeObject(this.players); 
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
-		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosTeamManager.dat");
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
-			oos.writeObject(this.teamManagerList);
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
-		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosTechnicalMember.dat");
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
-			oos.writeObject(this.technicalMemberList);
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
-		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosManyQuestions.dat");
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) { 
-			oos.writeObject(this.manyQuestions);
+			//Team Manager
+			FileOutputStream fos1 = new FileOutputStream("src/arquivos_espanha/dadosTeamManager.dat");
+			ObjectOutputStream oos1 = new ObjectOutputStream(fos1);
+			oos1.writeObject(this.teamManagerList);
+			//Technical Member
+			FileOutputStream fos2 = new FileOutputStream("src/arquivos_espanha/dadosTechnicalMember.dat");
+			ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
+			oos2.writeObject(this.technicalMemberList);
+			//Many Questions
+			FileOutputStream fos3 = new FileOutputStream("src/arquivos_espanha/dadosManyQuestions.dat");
+			ObjectOutputStream oos3 = new ObjectOutputStream(fos3);
+			oos3.writeObject(this.manyQuestions);
 			
-
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}	
+		}
+		
 
 	}
 
