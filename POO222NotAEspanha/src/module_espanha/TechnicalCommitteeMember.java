@@ -22,7 +22,7 @@ public class TechnicalCommitteeMember extends Person implements Serializable {
 		
 		//Nickname
 		public String getNickname() {
-			return nickname;
+			return this.nickname;
 		}
 		public void setNickname(String nickname) {
 			if(nickname != null && !nickname.isBlank()) {this.nickname = nickname;}
@@ -30,7 +30,7 @@ public class TechnicalCommitteeMember extends Person implements Serializable {
 		}
 		//Role 
 		public String getRole() {
-			return role;
+			return this.role;
 		}
 		public void setRole(String role) {
 			if(role != null && !role.isBlank()) {this.role = role;}
@@ -39,7 +39,7 @@ public class TechnicalCommitteeMember extends Person implements Serializable {
 		}
 		//BirthDate
 		public LocalDate getBirthDate() {
-			return birthDate;
+			return this.birthDate;
 		}
 		public void setBirthDate(LocalDate birthDate){
 			if(birthDate != null) {this.birthDate = birthDate;}

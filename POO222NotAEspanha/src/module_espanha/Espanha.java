@@ -213,7 +213,6 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 			js.addProperty("weight", p.getWeigth());
 			js.addProperty("birthDate", df.format(p.getBirthDate()));
 			js.addProperty("position", p.getPosition());
-			js.addProperty("number: ", p.getNumber());
 			js.addProperty("currentClub", p.getCurrentClub());
 			p.countQuestion();
 			players.put(p.getNumber(), p);

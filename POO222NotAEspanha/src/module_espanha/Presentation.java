@@ -45,6 +45,7 @@ public class Presentation {
 	private JTextField tf_teamM_email;
 	private JTextField tf_teamM_name;
 	private JTextField tf_teamM_remove;
+	private Espanha espanha;
 	/**
 	 * Launch the application.
 	 */
@@ -73,7 +74,7 @@ public class Presentation {
 	 */
 	private void initialize() {
 		
-		Espanha espanha = new Espanha();
+		espanha = new Espanha();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 653, 538);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

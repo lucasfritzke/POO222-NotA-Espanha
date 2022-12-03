@@ -24,7 +24,7 @@ public class TeamManager extends Person implements Serializable{
 
 	//Tel1
 	public String getTel1() {
-		return tel1;
+		return this.tel1;
 	}
 	public void setTel1(String tel1) {
 		if(tel1 != null && !tel1.isBlank()) {this.tel1 = tel1;}
@@ -32,7 +32,7 @@ public class TeamManager extends Person implements Serializable{
 	}
 	//Tel2
 	public String getTel2() {
-		return tel2;
+		return this.tel2;
 	}
 	public void setTel2(String tel2) {
 		if(tel2 != null && !tel2.isBlank()) {this.tel2 = tel2;}
@@ -40,7 +40,7 @@ public class TeamManager extends Person implements Serializable{
 	}
 	//Email
 	public String getEmailAccount() {
-		return emailAccount;
+		return this.emailAccount;
 	}
 	public void setEmailAccount(String emailAccount) {
 		if(emailAccount != null && !emailAccount.isBlank()) {this.emailAccount = emailAccount;}
@@ -49,7 +49,7 @@ public class TeamManager extends Person implements Serializable{
 	}
 	// If IsManager = true this class is the press officer 
 	public boolean isPressOfficer() {
-		return pressOfficer;
+		return this.pressOfficer;
 	}
 	public void setManager(boolean pressOfficer) {
 		this.pressOfficer = pressOfficer;

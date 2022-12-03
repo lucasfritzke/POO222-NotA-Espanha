@@ -14,6 +14,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
+import fifa.NationalTeamStats;
 import module_espanha.Espanha;
 import module_espanha.Player;
 
@@ -42,37 +43,58 @@ class EspanhaTest {
 	
 	@Test
 	void testGetPlaye() {
-		Gson gson = new Gson();
 		String p = e.getPlayer(10);
 		JsonObject jo = (JsonObject) JsonParser.parseString(p);
 		JsonElement nome = jo.get("name");
 		assertEquals("Marco Asensio", nome.getAsString());
 	}
 	
-	/*
 	@Test
-	void testgetOldestPlayer() {
-		Espanha e = new Espanha();
-		e.addPlayer("Lucas","10","LC",1.84, 65.2, LocalDate.of(2000, 12, 25), "Forward","Vasco");
-		e.addPlayer("Lucas","11","LC",1.84, 65.2, LocalDate.of(1995, 12, 25), "Forward","Vasco");
-		e.addPlayer("Lucas","13","LC",1.84, 65.2, LocalDate.of(1992, 12, 25), "Forward","Vasco");
-		assertEquals(29, e.getOldestPlayer());
+	void testGetPlaye2() {
+		String p = e.getPlayer(9);
+		JsonObject jo = (JsonObject) JsonParser.parseString(p);
+		JsonElement club = jo.get("currentClub");
+		assertEquals("RB Leipzig", club.getAsString());
 	}
 	
 	@Test
-	void testgetYoungestPlayer() {
-		Espanha e = new Espanha();
-		e.addPlayer("Lucas","10","LC",1.84, 65.2, LocalDate.of(2000, 12, 25), "Forward","Vasco");
-		e.addPlayer("Lucas","11","LC",1.84, 65.2, LocalDate.of(1995, 12, 25), "Forward","Vasco");
-		e.addPlayer("Lucas","13","LC",1.84, 65.2, LocalDate.of(1992, 12, 25), "Forward","Vasco");
-		assertEquals(21, e.getYoungestPlayer());
+	void testgetPressOfficerContacts() {
+		String p = e.getPressOfficerContacts();
+		JsonObject jo = (JsonObject) JsonParser.parseString(p);
+		JsonElement nome = jo.get("name");
+		assertEquals("Marcos Rodriguez", nome.getAsString());
 	}
 	
 	@Test
-	void testgetYoungestPlayerException() {
-		Espanha e = new Espanha();
-		assertThrows(IllegalArgumentException.class, () -> e.getYoungestPlayer()); // Não há nenhum jogador adicionado
+	void testGetCountryName() {
+		assertEquals("Spain", e.getCountryName());
 	}
-	*/
 	
+	@Test
+	void testGetStatsResponsible() {
+		int qtd_inicial = e.getHowManyQuestions();
+		double d = e.getAverageAge();
+		int i = e.getOldestPlayer();
+		NationalTeamStats n = e;
+		assertEquals((qtd_inicial+2), n.getHowManyQuestions());
+	}
+	
+	
+	
+	@Test
+	void testGetHowManyCallsToPlayer() {
+		int qtd_inicial = Integer.parseInt(e.getHowManyCallsToPlayer(1));
+		String j = e.getPlayer(1);
+		assertEquals((qtd_inicial+1),Integer.parseInt(e.getHowManyCallsToPlayer(1)));
+	}
+	
+	@Test
+	void testGetHowManyCallsToPlayerStats() {
+		int qtd_inicial = Integer.parseInt(e.getHowManyCallsToPlayer(1));
+		String j = e.getPlayer(1);
+		j = e.getPlayer(1);
+		j = e.getPlayer(1);
+		NationalTeamStats n = e;
+		assertEquals((qtd_inicial+3),Integer.parseInt(n.getHowManyCallsToPlayer(1)));
+	}
 }

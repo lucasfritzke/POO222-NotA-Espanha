@@ -10,15 +10,11 @@
     <fullyQualifiedTypeName name="moduleEspanha.Player"/>
     <fullyQualifiedTypeName name="com.google.gson.JsonArray"/>
     <fullyQualifiedTypeName name="moduleEspanha.TechnicalCommitteeMember"/>
-    <fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
-    <fullyQualifiedTypeName name="com.google.gson.stream.JsonWriter"/>
     <fullyQualifiedTypeName name="java.io.FileWriter"/>
     <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
     <fullyQualifiedTypeName name="java.nio.file.Path"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
-    <fullyQualifiedTypeName name="fifa.NationalTeamStats"/>
-    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
     <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
     <fullyQualifiedTypeName name="java.lang.ClassLoader"/>
@@ -27,5 +23,16 @@
     <fullyQualifiedTypeName name="java.net.URL"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="module_espanha.Espanha"/>
+    <fullyQualifiedTypeName name="java.lang.Double"/>
+    <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
+    <fullyQualifiedTypeName name="com.google.gson.GsonBuilder"/>
+    <fullyQualifiedTypeName name="com.google.gson.Gson"/>
+    <fullyQualifiedTypeName name="com.google.gson.stream.JsonWriter"/>
+    <fullyQualifiedTypeName name="com.google.gson.stream.JsonReader"/>
+    <fullyQualifiedTypeName name="com.google.gson.JsonParser"/>
+    <fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
+    <fullyQualifiedTypeName name="com.google.gson.JsonElement"/>
+    <fullyQualifiedTypeName name="fifa.NationalTeamStats"/>
 </qualifiedTypeNameHistroy>
