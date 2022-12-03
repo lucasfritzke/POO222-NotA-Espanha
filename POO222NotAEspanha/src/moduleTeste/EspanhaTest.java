@@ -83,18 +83,18 @@ class EspanhaTest {
 	
 	@Test
 	void testGetHowManyCallsToPlayer() {
-		int qtd_inicial = Integer.parseInt(e.getHowManyCallsToPlayer(1));
+		int qtd_inicial = e.getHowManyCallsToPlayer(1);
 		String j = e.getPlayer(1);
-		assertEquals((qtd_inicial+1),Integer.parseInt(e.getHowManyCallsToPlayer(1)));
+		assertEquals((qtd_inicial+1),e.getHowManyCallsToPlayer(1));
 	}
 	
 	@Test
 	void testGetHowManyCallsToPlayerStats() {
-		int qtd_inicial = Integer.parseInt(e.getHowManyCallsToPlayer(1));
+		int qtd_inicial =e.getHowManyCallsToPlayer(1);
 		String j = e.getPlayer(1);
 		j = e.getPlayer(1);
 		j = e.getPlayer(1);
 		NationalTeamStats n = e;
-		assertEquals((qtd_inicial+3),Integer.parseInt(n.getHowManyCallsToPlayer(1)));
+		assertEquals((qtd_inicial+3),n.getHowManyCallsToPlayer(1));
 	}
 }

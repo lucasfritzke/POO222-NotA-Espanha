@@ -1,7 +1,9 @@
 package module_espanha;
+
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -39,30 +41,76 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 	@SuppressWarnings("unchecked")
 	private void initizalize() {
 
-		try {
-			ObjectInputStream ois = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosPlayers.dat"));
-			this.players = (HashMap<String, Player>) ois.readObject();
-			
-			ObjectInputStream ois1 = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTechnicalMember.dat"));
-			this.technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois1.readObject();
-			
-			ObjectInputStream ois2 = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosTeamManager.dat"));
-			this.teamManagerList = (ArrayList<TeamManager>) ois2.readObject();
-			
-			ObjectInputStream ois3 = new ObjectInputStream(getClass().getResourceAsStream("/arquivos_espanha/dadosManyQuestions.dat"));
-			this.manyQuestions = (Integer) ois3.readObject();
+		File arquivos_espanha = new File("arquivos_espanha");
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		// No caso da pasta já existir
+		if (arquivos_espanha.exists()) {
+
+			try  {
+				FileInputStream fi = new FileInputStream("arquivos_espanha/dadosPlayers.dat");
+				ObjectInputStream ois = new ObjectInputStream(fi);
+				this.players = (HashMap<String, Player>) ois.readObject();
+				ois.close();
+				FileInputStream fi1 = new FileInputStream("arquivos_espanha/dadosTechnicalMember.dat");
+				ObjectInputStream ois1 = new ObjectInputStream(fi1);
+				this.technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois1.readObject();
+
+				FileInputStream fi2 = new FileInputStream("arquivos_espanha/dadosTeamManager.dat");
+				ObjectInputStream ois2 = new ObjectInputStream(fi2);
+				this.teamManagerList = (ArrayList<TeamManager>) ois2.readObject();
+
+				FileInputStream fi3 = new FileInputStream("arquivos_espanha/dadosManyQuestions.dat");
+				ObjectInputStream ois3 = new ObjectInputStream(fi3);
+				this.manyQuestions = (Integer) ois3.readObject();
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			// Se a pasta não existir criar a pasta e importa os arquivos via gerResource do
+			// .jar
+			
+			if(arquivos_espanha.mkdir()) {
+				JOptionPane.showMessageDialog(null, "Diretório criado com sucesso");
+			}
+			try {
+				ObjectInputStream ois = new ObjectInputStream(
+						getClass().getResourceAsStream("/dadosIniciais/dadosPlayers.dat"));
+				this.players = (HashMap<String, Player>) ois.readObject();
+
+				ObjectInputStream ois1 = new ObjectInputStream(
+						getClass().getResourceAsStream("/dadosIniciais/dadosTechnicalMember.dat"));
+				this.technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois1.readObject();
+
+				ObjectInputStream ois2 = new ObjectInputStream(
+						getClass().getResourceAsStream("/dadosIniciais/dadosTeamManager.dat"));
+				this.teamManagerList = (ArrayList<TeamManager>) ois2.readObject();
+
+				ObjectInputStream ois3 = new ObjectInputStream(
+						getClass().getResourceAsStream("/dadosIniciais/dadosManyQuestions.dat"));
+				this.manyQuestions = (Integer) ois3.readObject();
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
-		
+
 	}
 
 	public void addTeamManager(String name, String tel1, String tel2, String email, boolean isPressOfficer) {
@@ -167,11 +215,11 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 		this.manyQuestions++;
 		int youngesPlayer = -1;
 		if (!players.isEmpty()) {
-			Player yp=null;
+			Player yp = null;
 			for (Player p : players.values()) {
 				if (youngesPlayer == -1 || p.getAge() < youngesPlayer) {
-					 yp= p;
-					 youngesPlayer =  p.getAge();
+					yp = p;
+					youngesPlayer = p.getAge();
 				}
 			}
 			return Integer.parseInt(yp.getNumber());
@@ -191,8 +239,8 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 				sumAge += p.getAge();
 				count++;
 			}
-			
-			return  sumAge / count;
+
+			return sumAge / count;
 
 		} else {
 			return 0;
@@ -303,54 +351,52 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 
 	@Override
 	public int getHowManyQuestions() {
-		
+
 		return this.manyQuestions;
 	}
 
 	@Override
-	public String getHowManyCallsToPlayer(int number) {
-		
-		if(players.containsKey(Integer.toString(number))) {
+	public int getHowManyCallsToPlayer(int number) {
+
+		if (players.containsKey(Integer.toString(number))) {
 			Player p = players.get(Integer.toString(number));
-			return Integer.toString(p.getHowManyQuestions());
+			return p.getHowManyQuestions();
 		} else {
-			return null;
+			return 0;
 		}
-		
+
 	}
-	
-	
+
 	public ArrayList<String> getPositionsList() {
 		Player p = new Player();
 		return p.getPositionsList();
 	}
 
-	
 	public void salvar() {
-		
-		//player
-		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosPlayers.dat");
+
+		// player
+		try (FileOutputStream fos = new FileOutputStream("arquivos_espanha/dadosPlayers.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(this.players);
-			
-			//Team Manager
-			FileOutputStream fos1 = new FileOutputStream("src/arquivos_espanha/dadosTeamManager.dat");
+
+			// Team Manager
+			FileOutputStream fos1 = new FileOutputStream("arquivos_espanha/dadosTeamManager.dat");
 			try (ObjectOutputStream oos1 = new ObjectOutputStream(fos1)) {
 				oos1.writeObject(this.teamManagerList);
 			}
-			
-			//Technical Member
-			FileOutputStream fos2 = new FileOutputStream("src/arquivos_espanha/dadosTechnicalMember.dat");
+
+			// Technical Member
+			FileOutputStream fos2 = new FileOutputStream("arquivos_espanha/dadosTechnicalMember.dat");
 			try (ObjectOutputStream oos2 = new ObjectOutputStream(fos2)) {
 				oos2.writeObject(this.technicalMemberList);
 			}
-			
-			//Many Questions
-			FileOutputStream fos3 = new FileOutputStream("src/arquivos_espanha/dadosManyQuestions.dat");
+
+			// Many Questions
+			FileOutputStream fos3 = new FileOutputStream("arquivos_espanha/dadosManyQuestions.dat");
 			try (ObjectOutputStream oos3 = new ObjectOutputStream(fos3)) {
 				oos3.writeObject(this.manyQuestions);
 			}
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -358,9 +404,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 
 	}
-	
 
 }
