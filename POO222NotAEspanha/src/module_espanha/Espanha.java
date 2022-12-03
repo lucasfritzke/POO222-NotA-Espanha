@@ -1,5 +1,4 @@
 package module_espanha;
-
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,25 +8,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import fifa.NationalTeamInfos;
 import fifa.NationalTeamStats;
 
-public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializable {
+public class Espanha implements NationalTeamInfos, NationalTeamStats {
 
 	private HashMap<String, Player> players = new HashMap<>();
 	private ArrayList<TeamManager> teamManagerList = new ArrayList<>();
@@ -41,6 +36,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		initizalize();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void initizalize() {
 
 		try {
@@ -139,7 +135,9 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	public int getHowManyMembers() {
 		this.manyQuestions++;
 		int manyMembers = 0;
-		manyMembers += players.size(); // Quantos jogadores tem cadastrado
+		manyMembers += teamManagerList.size();
+		manyMembers += technicalMemberList.size();
+		manyMembers += players.size();// Quantos jogadores tem cadastrado
 		return manyMembers;
 
 	}
@@ -148,14 +146,16 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	public int getOldestPlayer() {
 		this.manyQuestions++;
 		int olderPlayer = 0;
+		Player op = null;
 		if (!players.isEmpty()) {
 
 			for (Player p : players.values()) {
 				if (p.getAge() > olderPlayer) {
+					op = p;
 					olderPlayer = p.getAge();
 				}
 			}
-			return olderPlayer;
+			return Integer.parseInt(op.getNumber());
 		} else {
 			return 0;
 		}
@@ -167,14 +167,14 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		this.manyQuestions++;
 		int youngesPlayer = -1;
 		if (!players.isEmpty()) {
-
+			Player yp=null;
 			for (Player p : players.values()) {
 				if (youngesPlayer == -1 || p.getAge() < youngesPlayer) {
-					youngesPlayer = p.getAge();
+					 yp= p;
+					 youngesPlayer =  p.getAge();
 				}
-
 			}
-			return youngesPlayer;
+			return Integer.parseInt(yp.getNumber());
 		} else {
 			return 0;
 		}
@@ -191,8 +191,8 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 				sumAge += p.getAge();
 				count++;
 			}
-
-			return sumAge / count;
+			
+			return  sumAge / count;
 
 		} else {
 			return 0;
@@ -206,8 +206,8 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			Player p = players.get(Integer.toString(number));
 			JsonObject js = new JsonObject();
-			js.addProperty("number: ", p.getNumber());
-			js.addProperty("name: ", p.getName());
+			js.addProperty("number", Integer.parseInt(p.getNumber()));
+			js.addProperty("name", p.getName());
 			js.addProperty("nickname", p.getNickName());
 			js.addProperty("height", p.getHeigth());
 			js.addProperty("weight", p.getWeigth());
@@ -247,6 +247,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		return json;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public String getCountryName() {
 		manyQuestions++;
@@ -256,7 +257,6 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	@Override
 	public Image getFlagImage() {
 		this.manyQuestions++;
-		
 		BufferedImage bim = null;
 		try {
 			bim = ImageIO.read(getClass().getResourceAsStream("/arquivos_espanha/countryFlag.jpg"));
@@ -330,21 +330,27 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 	public void salvar() {
 		
 		//player
-		try (	FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosPlayers.dat");
+		try (FileOutputStream fos = new FileOutputStream("src/arquivos_espanha/dadosPlayers.dat");
 				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-			oos.writeObject(this.players); 
+			oos.writeObject(this.players);
+			
 			//Team Manager
 			FileOutputStream fos1 = new FileOutputStream("src/arquivos_espanha/dadosTeamManager.dat");
-			ObjectOutputStream oos1 = new ObjectOutputStream(fos1);
-			oos1.writeObject(this.teamManagerList);
+			try (ObjectOutputStream oos1 = new ObjectOutputStream(fos1)) {
+				oos1.writeObject(this.teamManagerList);
+			}
+			
 			//Technical Member
 			FileOutputStream fos2 = new FileOutputStream("src/arquivos_espanha/dadosTechnicalMember.dat");
-			ObjectOutputStream oos2 = new ObjectOutputStream(fos2);
-			oos2.writeObject(this.technicalMemberList);
+			try (ObjectOutputStream oos2 = new ObjectOutputStream(fos2)) {
+				oos2.writeObject(this.technicalMemberList);
+			}
+			
 			//Many Questions
 			FileOutputStream fos3 = new FileOutputStream("src/arquivos_espanha/dadosManyQuestions.dat");
-			ObjectOutputStream oos3 = new ObjectOutputStream(fos3);
-			oos3.writeObject(this.manyQuestions);
+			try (ObjectOutputStream oos3 = new ObjectOutputStream(fos3)) {
+				oos3.writeObject(this.manyQuestions);
+			}
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -356,13 +362,6 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats, Serializab
 		
 
 	}
-
-	@Override
-	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		this.salvar();
-	}
-	
 	
 
 }

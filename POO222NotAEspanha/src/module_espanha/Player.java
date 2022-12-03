@@ -19,7 +19,8 @@ public class Player extends Person implements Serializable {
 	private int howManyQuestions;
 	private static ArrayList<String> positionsList = new ArrayList<>(Arrays.asList("Goalkeeper", "Right-back",
 			"Centre-back", "Forward", "Defensive Mid", "Attacking Mid", "Winger", "Striker"));
-
+	
+	
 	//Classe utilizada para testes
 	public Player() {
 		super();
@@ -43,7 +44,7 @@ public class Player extends Person implements Serializable {
 	}
 
 	public String getNumber() {
-		return number;
+		return this.number;
 	}
 
 	public void setNumber(String number) {
@@ -142,6 +143,7 @@ public class Player extends Person implements Serializable {
 	}
 
 	// Retorna para classe de apresentacao as posicoes existentes
+	@SuppressWarnings("static-access")
 	public ArrayList<String> getPositionsList() {
 		return this.positionsList;
 	}
