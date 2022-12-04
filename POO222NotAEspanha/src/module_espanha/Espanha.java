@@ -50,7 +50,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 				FileInputStream fi = new FileInputStream("arquivos_espanha/dadosPlayers.dat");
 				ObjectInputStream ois = new ObjectInputStream(fi);
 				this.players = (HashMap<String, Player>) ois.readObject();
-				ois.close();
+
 				FileInputStream fi1 = new FileInputStream("arquivos_espanha/dadosTechnicalMember.dat");
 				ObjectInputStream ois1 = new ObjectInputStream(fi1);
 				this.technicalMemberList = (ArrayList<TechnicalCommitteeMember>) ois1.readObject();
@@ -75,7 +75,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 			}
 
 		} else {
-			// Se a pasta não existir criar a pasta e importa os arquivos via gerResource do
+			// Se o diretório não existir, criar a pasta e importar os arquivos via gerResource do
 			// .jar
 			
 			if(arquivos_espanha.mkdir()) {
@@ -128,6 +128,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 		// Adding team manager
 		TeamManager tm = new TeamManager(name, tel1, tel2, email, isPressOfficer);
 		teamManagerList.add(tm);
+		this.salvar();
 	}
 
 	public void removeTeamManger(String email) {
@@ -136,6 +137,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 		for (TeamManager tm : teamManagerList) {
 			if (email.equals(tm.getEmailAccount())) {
 				teamManagerList.remove(tm);
+				this.salvar();
 				return;
 			}
 		}
@@ -145,12 +147,14 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 	public void addTCMember(String name, String nickname, String role, LocalDate birthDate) {
 		TechnicalCommitteeMember tcm = new TechnicalCommitteeMember(name, nickname, role, birthDate);
 		technicalMemberList.add(tcm);
+		this.salvar();
 	}
 
 	public void removeTCMember(String name) {
 		for (TechnicalCommitteeMember tcm : technicalMemberList) {
 			if (tcm.getName().equals(name)) {
 				technicalMemberList.remove(tcm);
+				this.salvar();
 				return;
 			}
 		}
@@ -163,6 +167,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 		if (number != null && !players.containsKey(number)) {
 			Player p = new Player(name, number, nickName, heigth, weigth, birthDate, position, currentClub);
 			players.put(p.getNumber(), p);
+			this.salvar();
 		} else {
 			throw new IllegalArgumentException("number to play already used");
 		}
@@ -174,6 +179,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 			Player p = players.get(number);
 			players.remove(number);
 			JOptionPane.showMessageDialog(null, "Player " + p.getName() + "successfully removed");
+			this.salvar();
 		} else {
 			throw new IllegalArgumentException("player does not exist");
 		}
@@ -186,6 +192,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 		manyMembers += teamManagerList.size();
 		manyMembers += technicalMemberList.size();
 		manyMembers += players.size();// Quantos jogadores tem cadastrado
+		this.salvar();
 		return manyMembers;
 
 	}
@@ -203,6 +210,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 					olderPlayer = p.getAge();
 				}
 			}
+			this.salvar();
 			return Integer.parseInt(op.getNumber());
 		} else {
 			return 0;
@@ -222,6 +230,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 					youngesPlayer = p.getAge();
 				}
 			}
+			this.salvar();
 			return Integer.parseInt(yp.getNumber());
 		} else {
 			return 0;
@@ -239,7 +248,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 				sumAge += p.getAge();
 				count++;
 			}
-
+			this.salvar();
 			return sumAge / count;
 
 		} else {
@@ -265,6 +274,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 			p.countQuestion();
 			players.put(p.getNumber(), p);
 			String json = gson.toJson(js).toString();
+			this.salvar();
 			return json;
 		} else {
 			return null;
@@ -291,6 +301,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 		js.addProperty("cellphone2", tmTemporary.getTel2());
 		js.addProperty("email", tmTemporary.getEmailAccount());
 		String json = gson.toJson(js).toString();
+		this.salvar();
 		return json;
 	}
 
@@ -298,6 +309,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 	@Override
 	public String getCountryName() {
 		manyQuestions++;
+		this.salvar();
 		return this.countryName;
 	}
 
@@ -306,8 +318,9 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 		this.manyQuestions++;
 		BufferedImage bim = null;
 		try {
-			bim = ImageIO.read(getClass().getResourceAsStream("/arquivos_espanha/countryFlag.jpg"));
+			bim = ImageIO.read(getClass().getResourceAsStream("/dadosIniciais/countryFlag.jpg"));
 			Image im = bim.getScaledInstance(1118, 788, 300);
+			this.salvar();
 			return im;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -340,7 +353,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		this.salvar();
 		return Path.of(fl.toString());
 	}
 
@@ -351,7 +364,6 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 
 	@Override
 	public int getHowManyQuestions() {
-
 		return this.manyQuestions;
 	}
 
@@ -360,6 +372,7 @@ public class Espanha implements NationalTeamInfos, NationalTeamStats {
 
 		if (players.containsKey(Integer.toString(number))) {
 			Player p = players.get(Integer.toString(number));
+			this.salvar();
 			return p.getHowManyQuestions();
 		} else {
 			return 0;

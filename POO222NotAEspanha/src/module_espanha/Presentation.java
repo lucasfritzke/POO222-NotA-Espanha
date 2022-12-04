@@ -548,12 +548,12 @@ public class Presentation {
 		frame.getContentPane().add(btn_Many_Members_2);
 		
 		tf_getPlayer = new JTextField();
-		tf_getPlayer.setBounds(533, 206, 55, 26);
+		tf_getPlayer.setBounds(543, 218, 55, 26);
 		frame.getContentPane().add(tf_getPlayer);
 		tf_getPlayer.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Player Number");
-		lblNewLabel_2.setBounds(524, 233, 94, 13);
+		lblNewLabel_2.setBounds(539, 248, 72, 13);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JButton btn_player_averageAge = new JButton("Avarage Age");
@@ -590,10 +590,22 @@ public class Presentation {
 		btn_player_GetPlayer_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			NationalTeamStats n = espanha.getStatsResponsible();
-			JOptionPane.showMessageDialog(null, n.getHowManyCallsToPlayer(Integer.parseInt(tf_getPlayer.getText())));
+			
+			
+				try {
+					JOptionPane.showMessageDialog(null, n.getHowManyCallsToPlayer(Integer.parseInt(tf_getPlayer.getText())));
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NumberFormatException e1) {
+					
+					JOptionPane.showMessageDialog(null, "Invalid Number");
+				}
+			
+			
 			}
 		});
-		btn_player_GetPlayer_1.setBounds(429, 243, 94, 26);
+		btn_player_GetPlayer_1.setBounds(429, 241, 100, 26);
 		frame.getContentPane().add(btn_player_GetPlayer_1);
 		
 		
