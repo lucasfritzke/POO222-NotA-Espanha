@@ -41,6 +41,7 @@
 		<item key="JarManifestWizardPage.MANIFEST_LOCATION" value=""/>
 		<item key="JarManifestWizardPage.SEAL_JAR" value="false"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\Espanha.jar"/>
 			<item value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\espanha.jar"/>
 			<item value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\spainSoft.jar"/>
 		</list>
@@ -54,8 +55,10 @@
 		<item key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION" value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\POO-Final\POO222-NotA-Espanha"/>
 		<item key="FatJarPackageWizardPage.LIBRARY_HANDLING" value="2"/>
 		<item key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME" value="Presentation - POO222NotAEspanha"/>
-		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\Testes Espanha\Espanha 1.4.jar"/>
+		<item key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION" value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\Espanha (exe).jar"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\Espanha (exe).jar"/>
+			<item value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\Testes Espanha\Espanha 1.5.jar"/>
 			<item value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\Testes Espanha\Espanha 1.4.jar"/>
 			<item value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\Espanha 1.3.jar"/>
 			<item value="C:\Users\Lucas - FURB\OneDrive - FURB\Área de Trabalho\Espanha 1.2.jar"/>

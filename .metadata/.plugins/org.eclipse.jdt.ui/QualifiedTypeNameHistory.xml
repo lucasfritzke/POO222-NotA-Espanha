@@ -30,10 +30,10 @@
     <fullyQualifiedTypeName name="com.google.gson.JsonParser"/>
     <fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
     <fullyQualifiedTypeName name="com.google.gson.JsonElement"/>
-    <fullyQualifiedTypeName name="fifa.NationalTeamStats"/>
     <fullyQualifiedTypeName name="java.nio.file.Paths"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+    <fullyQualifiedTypeName name="fifa.NationalTeamStats"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>

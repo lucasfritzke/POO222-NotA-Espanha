@@ -1,3 +1,5 @@
+// Dupla: Lucas Fritzke e Guilherme W. Back
+
 package module_espanha;
 
 import java.awt.EventQueue;
